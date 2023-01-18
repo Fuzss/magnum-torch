@@ -16,37 +16,34 @@ import java.util.stream.Stream;
 
 public class MobSpawningHandler {
 
-    public boolean onLivingSpawn(EntityType<?> entityType, LevelAccessor levelAccessor, double posX, double posY, double posZ, MobSpawnType spawnType) {
-        if (levelAccessor.isClientSide()) return true;
+    public static boolean onLivingSpawn(EntityType<?> entityType, LevelAccessor levelAccessor, double posX, double posY, double posZ, MobSpawnType spawnType) {
+        if (levelAccessor.isClientSide() || !MagnumTorch.CONFIG.getHolder(ServerConfig.class).isAvailable()) return true;
         PoiManager poiManager = ((ServerLevelAccessor) levelAccessor).getLevel().getPoiManager();
         BlockPos pos = new BlockPos(posX, posY, posZ);
-        if (this.isSpawnCancelled(poiManager, entityType, pos, spawnType, ModRegistry.DIAMOND_MAGNUM_TORCH_POI_TYPE.getResourceKey(), MagnumTorch.CONFIG.get(ServerConfig.class).diamond)) {
+        if (isSpawnCancelled(poiManager, entityType, pos, spawnType, ModRegistry.DIAMOND_MAGNUM_TORCH_POI_TYPE.getResourceKey(), MagnumTorch.CONFIG.get(ServerConfig.class).diamond)) {
             return false;
-        } else if (this.isSpawnCancelled(poiManager, entityType, pos, spawnType, ModRegistry.EMERALD_MAGNUM_TORCH_POI_TYPE.getResourceKey(), MagnumTorch.CONFIG.get(ServerConfig.class).emerald)) {
+        } else if (isSpawnCancelled(poiManager, entityType, pos, spawnType, ModRegistry.EMERALD_MAGNUM_TORCH_POI_TYPE.getResourceKey(), MagnumTorch.CONFIG.get(ServerConfig.class).emerald)) {
             return false;
-        } else if (this.isSpawnCancelled(poiManager, entityType, pos, spawnType, ModRegistry.AMETHYST_MAGNUM_TORCH_POI_TYPE.getResourceKey(), MagnumTorch.CONFIG.get(ServerConfig.class).amethyst)) {
-            return false;
-        }
-        return true;
+        } else return !isSpawnCancelled(poiManager, entityType, pos, spawnType, ModRegistry.AMETHYST_MAGNUM_TORCH_POI_TYPE.getResourceKey(), MagnumTorch.CONFIG.get(ServerConfig.class).amethyst);
     }
 
-    private boolean isSpawnCancelled(PoiManager poiManager, EntityType<?> entityType, BlockPos pos, MobSpawnType spawnType, ResourceKey<PoiType> poiType, ServerConfig.MagnumTorchConfig config) {
-        return config.blockedSpawnTypes.contains(spawnType) && this.isAffected(entityType, config) && this.anyInRange(poiManager, poiType, pos, config);
+    private static boolean isSpawnCancelled(PoiManager poiManager, EntityType<?> entityType, BlockPos pos, MobSpawnType spawnType, ResourceKey<PoiType> poiType, ServerConfig.MagnumTorchConfig config) {
+        return config.blockedSpawnTypes.contains(spawnType) && isAffected(entityType, config) && anyInRange(poiManager, poiType, pos, config);
     }
 
-    private boolean isAffected(EntityType<?> entityType, ServerConfig.MagnumTorchConfig config) {
+    private static boolean isAffected(EntityType<?> entityType, ServerConfig.MagnumTorchConfig config) {
         if (config.mobWhitelist.contains(entityType)) return false;
         if (config.mobCategories.contains(entityType.getCategory())) return true;
         return config.mobBlacklist.contains(entityType);
     }
 
-    private boolean anyInRange(PoiManager poiManager, ResourceKey<PoiType> poiType, BlockPos pos, ServerConfig.MagnumTorchConfig config) {
+    private static boolean anyInRange(PoiManager poiManager, ResourceKey<PoiType> poiType, BlockPos pos, ServerConfig.MagnumTorchConfig config) {
         // range based on cuboid
         Stream<BlockPos> all = poiManager.findAll(poiType1 -> poiType1.is(poiType), pos1 -> true, pos, (int) Math.ceil(Math.sqrt(config.horizontalRange * config.horizontalRange + config.verticalRange * config.verticalRange)), PoiManager.Occupancy.ANY);
-        return all.anyMatch(center -> this.isInRange(center, pos, config.horizontalRange, config.verticalRange, config.shapeType));
+        return all.anyMatch(center -> isInRange(center, pos, config.horizontalRange, config.verticalRange, config.shapeType));
     }
 
-    private boolean isInRange(BlockPos center, BlockPos pos, int horizontalRange, int verticalRange, ServerConfig.ShapeType shapeType) {
+    private static boolean isInRange(BlockPos center, BlockPos pos, int horizontalRange, int verticalRange, ServerConfig.ShapeType shapeType) {
         int dimX = Math.abs(center.getX() - pos.getX());
         int dimY = Math.abs(center.getY() - pos.getY());
         int dimZ = Math.abs(center.getZ() - pos.getZ());

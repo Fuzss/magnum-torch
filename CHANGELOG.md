@@ -3,6 +3,13 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog].
 
+## [v4.2.1-1.19.2] - 2023-01-18
+### Added
+- Magnum torches are now found in a new creative mode tab
+### Changed
+- Added additional checks to ensure the server config file is loaded already when it is used, so no errors are logged anymore
+- Some minor internal refactoring
+
 ## [v4.2.0-1.19.2] - 2022-08-21
 - Compiled for Minecraft 1.19.2
 

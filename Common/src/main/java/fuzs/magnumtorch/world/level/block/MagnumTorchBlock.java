@@ -1,4 +1,4 @@
-package fuzs.magnumtorch.block;
+package fuzs.magnumtorch.world.level.block;
 
 import fuzs.magnumtorch.MagnumTorch;
 import fuzs.magnumtorch.config.ServerConfig;
@@ -34,6 +34,7 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 import javax.annotation.Nullable;
 import java.util.List;
 
+@SuppressWarnings("deprecation")
 public class MagnumTorchBlock extends Block implements SimpleWaterloggedBlock {
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
     private static final VoxelShape TORCH_AABB = Block.box(6.0D, 0.0D, 6.0D, 10.0D, 16.0D, 10.0D);
@@ -97,7 +98,7 @@ public class MagnumTorchBlock extends Block implements SimpleWaterloggedBlock {
         if (p_56194_ == null) return;
         if (!Proxy.INSTANCE.hasShiftDown()) {
             tooltip.add(Component.translatable("block.magnumtorch.magnum_torch.info.more", Component.translatable("block.magnumtorch.magnum_torch.info.shift").withStyle(ChatFormatting.YELLOW)).withStyle(ChatFormatting.GRAY));
-        } else {
+        } else if (MagnumTorch.CONFIG.getHolder(ServerConfig.class).isAvailable()) {
             ServerConfig.MagnumTorchConfig config = getTorchConfig(this);
             if (!config.mobCategories.isEmpty()) {
                 tooltip.add(Component.translatable("block.magnumtorch.magnum_torch.info.mob_types", config.mobCategories.stream()

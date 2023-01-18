@@ -10,5 +10,6 @@
   "block.magnumtorch.magnum_torch.info.whitelist": "Whitelist: %s",
   "block.magnumtorch.magnum_torch.info.shape_type": "Shape Type: %s",
   "block.magnumtorch.magnum_torch.info.horizontal_range": "Horizontal Range: %s",
-  "block.magnumtorch.magnum_torch.info.vertical_range": "Vertical Range: %s"
+  "block.magnumtorch.magnum_torch.info.vertical_range": "Vertical Range: %s",
+  "itemGroup.magnumtorch.main": "Magnum Torch"
 }

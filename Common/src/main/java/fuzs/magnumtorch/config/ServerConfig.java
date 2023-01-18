@@ -1,6 +1,5 @@
 package fuzs.magnumtorch.config;
 
-import fuzs.magnumtorch.MagnumTorch;
 import fuzs.puzzleslib.config.ConfigCore;
 import fuzs.puzzleslib.config.annotation.Config;
 import fuzs.puzzleslib.config.serialization.EntryCollectionBuilder;

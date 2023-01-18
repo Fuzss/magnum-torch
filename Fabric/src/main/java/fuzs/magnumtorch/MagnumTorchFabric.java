@@ -14,7 +14,6 @@ public class MagnumTorchFabric implements ModInitializer {
     }
 
     private static void registerHandlers() {
-        MobSpawningHandler mobSpawningHandler = new MobSpawningHandler();
-        LivingCheckSpawnCallback.EVENT.register(mobSpawningHandler::onLivingSpawn);
+        LivingCheckSpawnCallback.EVENT.register(MobSpawningHandler::onLivingSpawn);
     }
 }

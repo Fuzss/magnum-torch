@@ -27,10 +27,9 @@ public class MagnumTorchForge {
     }
 
     private static void registerHandlers() {
-        MobSpawningHandler mobSpawningHandler = new MobSpawningHandler();
         MinecraftForge.EVENT_BUS.addListener((final LivingSpawnEvent.CheckSpawn evt) -> {
             // handles most spawn attempts such as natural spawning at night, cats, phantoms, patrols and monster spawners
-            if (!mobSpawningHandler.onLivingSpawn(evt.getEntity().getType(), evt.getLevel(), evt.getX(), evt.getY(), evt.getZ(), evt.getSpawnReason())) {
+            if (!MobSpawningHandler.onLivingSpawn(evt.getEntity().getType(), evt.getLevel(), evt.getX(), evt.getY(), evt.getZ(), evt.getSpawnReason())) {
                 evt.setResult(Event.Result.DENY);
             }
         });
@@ -39,7 +38,7 @@ public class MagnumTorchForge {
             // this is fine since the ones we care about should already have been handled by CheckSpawn
             if (evt.getSpawnReason() == MobSpawnType.NATURAL || evt.getSpawnReason() == MobSpawnType.SPAWNER) return;
             // handles missing cases from CheckSpawn, most importantly wandering traders, zombie pigmen from portals
-            if (!mobSpawningHandler.onLivingSpawn(evt.getEntity().getType(), evt.getLevel(), evt.getX(), evt.getY(), evt.getZ(), evt.getSpawnReason())) {
+            if (!MobSpawningHandler.onLivingSpawn(evt.getEntity().getType(), evt.getLevel(), evt.getX(), evt.getY(), evt.getZ(), evt.getSpawnReason())) {
                 evt.setCanceled(true);
             }
         });
