@@ -4,6 +4,7 @@
   "compatibilityLevel": "JAVA_17",
   "package": "fuzs.magnumtorch.mixin",
   "refmap": "magnumtorch.refmap.json",
+  "plugin": "fuzs.magnumtorch.mixin.ModMixinConfigPlugin",
   "mixins": [
     "CatSpawnerMixin",
     "EntityTypeMixin",

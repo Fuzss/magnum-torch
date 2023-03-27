@@ -2,9 +2,11 @@ package fuzs.magnumtorch;
 
 import fuzs.magnumtorch.config.ServerConfig;
 import fuzs.magnumtorch.init.ModRegistry;
-import fuzs.puzzleslib.config.ConfigHolder;
-import fuzs.puzzleslib.core.CoreServices;
-import fuzs.puzzleslib.core.ModConstructor;
+import fuzs.puzzleslib.api.config.v3.ConfigHolder;
+import fuzs.puzzleslib.api.core.v1.ModConstructor;
+import fuzs.puzzleslib.api.core.v1.context.CreativeModeTabContext;
+import fuzs.puzzleslib.api.item.v2.CreativeModeTabConfigurator;
+import net.minecraft.world.item.ItemStack;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,12 +15,15 @@ public class MagnumTorch implements ModConstructor {
     public static final String MOD_NAME = "Magnum Torch";
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_NAME);
 
-    @SuppressWarnings("Convert2MethodRef")
-    public static final ConfigHolder CONFIG = CoreServices.FACTORIES.serverConfig(ServerConfig.class, () -> new ServerConfig());
+    public static final ConfigHolder CONFIG = ConfigHolder.builder(MOD_ID).server(ServerConfig.class);
 
     @Override
     public void onConstructMod() {
-        CONFIG.bakeConfigs(MOD_ID);
         ModRegistry.touch();
+    }
+
+    @Override
+    public void onRegisterCreativeModeTabs(CreativeModeTabContext context) {
+        context.registerCreativeModeTab(CreativeModeTabConfigurator.from(MOD_ID, () -> new ItemStack(ModRegistry.DIAMOND_MAGNUM_TORCH_ITEM.get())));
     }
 }

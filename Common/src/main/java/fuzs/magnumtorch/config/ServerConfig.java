@@ -1,9 +1,9 @@
 package fuzs.magnumtorch.config;
 
-import fuzs.puzzleslib.config.ConfigCore;
-import fuzs.puzzleslib.config.annotation.Config;
-import fuzs.puzzleslib.config.serialization.EntryCollectionBuilder;
-import net.minecraft.core.Registry;
+import fuzs.puzzleslib.api.config.v3.Config;
+import fuzs.puzzleslib.api.config.v3.ConfigCore;
+import fuzs.puzzleslib.api.config.v3.serialization.ConfigDataSet;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.MobSpawnType;
@@ -15,11 +15,11 @@ import java.util.stream.Stream;
 
 public class ServerConfig implements ConfigCore {
     @Config(name = "diamond_torch")
-    public MagnumTorchConfig diamond = new MagnumTorchConfig();
+    public final MagnumTorchConfig diamond = new MagnumTorchConfig();
     @Config(name = "emerald_torch")
-    public MagnumTorchConfig emerald = new MagnumTorchConfig();
+    public final MagnumTorchConfig emerald = new MagnumTorchConfig();
     @Config(name = "amethyst_torch")
-    public MagnumTorchConfig amethyst = new MagnumTorchConfig();
+    public final MagnumTorchConfig amethyst = new MagnumTorchConfig();
 
     public ServerConfig() {
         // diamond torch
@@ -50,10 +50,10 @@ public class ServerConfig implements ConfigCore {
         @Config(name = "mob_category", description = {"Mobs of this category are prevented from spawning through natural means (e.g. mob spawners and breeding will still work).", "For refining affected mobs use blacklist and whitelist options.", "If you only want to prevent a few mob types from spawning that do not fit any category leave this list empty and include them in the blacklist option."})
         @Config.AllowedValues(values = {"MONSTER", "CREATURE", "AMBIENT", "AXOLOTLS", "UNDERGROUND_WATER_CREATURE", "WATER_CREATURE", "WATER_AMBIENT"})
         List<String> mobCategoryRaw = Stream.of(MobCategory.MONSTER).map(Enum::name).collect(Collectors.toList());
-        @Config(name = "mob_blacklist", description = {"Mobs that should not be allowed to spawn despite being absent from \"mob_category\".", EntryCollectionBuilder.CONFIG_DESCRIPTION})
-        List<String> mobBlacklistRaw = EntryCollectionBuilder.getKeyList(Registry.ENTITY_TYPE_REGISTRY);
-        @Config(name = "mob_whitelist", description = {"Mobs that should still be allowed to spawn despite being included in \"mob_category\".", EntryCollectionBuilder.CONFIG_DESCRIPTION})
-        List<String> mobWhitelistRaw = EntryCollectionBuilder.getKeyList(Registry.ENTITY_TYPE_REGISTRY);
+        @Config(name = "mob_blacklist", description = {"Mobs that should not be allowed to spawn despite being absent from \"mob_category\".", ConfigDataSet.CONFIG_DESCRIPTION})
+        List<String> mobBlacklistRaw = ConfigDataSet.toString(Registries.ENTITY_TYPE);
+        @Config(name = "mob_whitelist", description = {"Mobs that should still be allowed to spawn despite being included in \"mob_category\".", ConfigDataSet.CONFIG_DESCRIPTION})
+        List<String> mobWhitelistRaw = ConfigDataSet.toString(Registries.ENTITY_TYPE);
         @Config(description = {"Type of shape used for calculating area in which spawns are prevented.", "This basically let's you choose between taxi cab or euclidean metrics."})
         public ShapeType shapeType = ShapeType.ELLIPSOID;
         @Config(description = "Range for preventing mob spawns on x-z-plane.")
@@ -68,16 +68,16 @@ public class ServerConfig implements ConfigCore {
 
         public Set<MobCategory> mobCategories;
         public Set<MobSpawnType> blockedSpawnTypes;
-        public Set<EntityType<?>> mobBlacklist;
-        public Set<EntityType<?>> mobWhitelist;
+        public ConfigDataSet<EntityType<?>> mobBlacklist;
+        public ConfigDataSet<EntityType<?>> mobWhitelist;
 
         @Override
         public void afterConfigReload() {
             // manually process enum lists as night config keeps values as strings, making it hard to deal with as generic type suggests an enum value
             this.mobCategories = this.mobCategoryRaw.stream().map(MobCategory::valueOf).collect(Collectors.toSet());
             this.blockedSpawnTypes = this.blockedSpawnTypesRaw.stream().map(MobSpawnType::valueOf).collect(Collectors.toSet());
-            this.mobBlacklist = EntryCollectionBuilder.of(Registry.ENTITY_TYPE_REGISTRY).buildSet(this.mobBlacklistRaw);
-            this.mobWhitelist = EntryCollectionBuilder.of(Registry.ENTITY_TYPE_REGISTRY).buildSet(this.mobWhitelistRaw);
+            this.mobBlacklist = ConfigDataSet.from(Registries.ENTITY_TYPE, this.mobBlacklistRaw);
+            this.mobWhitelist = ConfigDataSet.from(Registries.ENTITY_TYPE, this.mobWhitelistRaw);
         }
     }
 }

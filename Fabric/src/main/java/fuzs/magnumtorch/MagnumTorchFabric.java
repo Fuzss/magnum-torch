@@ -2,14 +2,14 @@ package fuzs.magnumtorch;
 
 import fuzs.magnumtorch.api.event.player.LivingCheckSpawnCallback;
 import fuzs.magnumtorch.handler.MobSpawningHandler;
-import fuzs.puzzleslib.core.CoreServices;
+import fuzs.puzzleslib.api.core.v1.ModConstructor;
 import net.fabricmc.api.ModInitializer;
 
 public class MagnumTorchFabric implements ModInitializer {
 
     @Override
     public void onInitialize() {
-        CoreServices.FACTORIES.modConstructor(MagnumTorch.MOD_ID).accept(new MagnumTorch());
+        ModConstructor.construct(MagnumTorch.MOD_ID, MagnumTorch::new);
         registerHandlers();
     }
 

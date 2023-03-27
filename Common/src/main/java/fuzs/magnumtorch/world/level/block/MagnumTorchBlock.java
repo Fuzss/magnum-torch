@@ -3,12 +3,12 @@ package fuzs.magnumtorch.world.level.block;
 import fuzs.magnumtorch.MagnumTorch;
 import fuzs.magnumtorch.config.ServerConfig;
 import fuzs.magnumtorch.init.ModRegistry;
-import fuzs.puzzleslib.proxy.Proxy;
+import fuzs.puzzleslib.api.core.v1.Proxy;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.Registry;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.ItemStack;
@@ -30,8 +30,8 @@ import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nullable;
 import java.util.List;
 
 @SuppressWarnings("deprecation")
@@ -108,13 +108,13 @@ public class MagnumTorchBlock extends Block implements SimpleWaterloggedBlock {
             }
             if (!config.mobBlacklist.isEmpty()) {
                 tooltip.add(Component.translatable("block.magnumtorch.magnum_torch.info.blacklist", config.mobBlacklist.stream()
-                        .map(mob -> Component.literal(Registry.ENTITY_TYPE.getKey(mob).toString()).withStyle(ChatFormatting.AQUA))
+                        .map(mob -> Component.literal(BuiltInRegistries.ENTITY_TYPE.getKey(mob).toString()).withStyle(ChatFormatting.AQUA))
                         .reduce((o1, o2) -> o1.append(", ").append(o2))
                         .orElse(Component.empty())).withStyle(ChatFormatting.GRAY));
             }
             if (!config.mobWhitelist.isEmpty()) {
                 tooltip.add(Component.translatable("block.magnumtorch.magnum_torch.info.whitelist", config.mobWhitelist.stream()
-                        .map(mob -> Component.literal(Registry.ENTITY_TYPE.getKey(mob).toString()).withStyle(ChatFormatting.AQUA))
+                        .map(mob -> Component.literal(BuiltInRegistries.ENTITY_TYPE.getKey(mob).toString()).withStyle(ChatFormatting.AQUA))
                         .reduce((o1, o2) -> o1.append(", ").append(o2))
                         .orElse(Component.empty())).withStyle(ChatFormatting.GRAY));
             }
