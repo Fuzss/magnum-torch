@@ -30,7 +30,7 @@ public class ServerConfig implements ConfigCore {
         this.diamond.blockedSpawnTypesRaw = Stream.of(MobSpawnType.NATURAL, MobSpawnType.PATROL, MobSpawnType.STRUCTURE, MobSpawnType.JOCKEY).map(Enum::name).collect(Collectors.toList());
         // emerald torch
         this.emerald.mobCategoryRaw = Stream.of(MobCategory.CREATURE).map(Enum::name).collect(Collectors.toList());
-        this.emerald.shapeType = ShapeType.CUBOID;
+        this.emerald.shapeType = SpawnShapeType.CUBOID;
         this.emerald.horizontalRange = 128;
         this.emerald.verticalRange = 64;
         // additionally includes event type to block wandering trader and llama spawning
@@ -42,10 +42,6 @@ public class ServerConfig implements ConfigCore {
         this.amethyst.blockedSpawnTypesRaw = Stream.of(MobSpawnType.NATURAL).map(Enum::name).collect(Collectors.toList());
     }
 
-    public enum ShapeType {
-        ELLIPSOID, CYLINDER, CUBOID
-    }
-
     public static class MagnumTorchConfig implements ConfigCore {
         @Config(name = "mob_category", description = {"Mobs of this category are prevented from spawning through natural means (e.g. mob spawners and breeding will still work).", "For refining affected mobs use blacklist and whitelist options.", "If you only want to prevent a few mob types from spawning that do not fit any category leave this list empty and include them in the blacklist option."})
         @Config.AllowedValues(values = {"MONSTER", "CREATURE", "AMBIENT", "AXOLOTLS", "UNDERGROUND_WATER_CREATURE", "WATER_CREATURE", "WATER_AMBIENT"})
@@ -55,7 +51,7 @@ public class ServerConfig implements ConfigCore {
         @Config(name = "mob_whitelist", description = {"Mobs that should still be allowed to spawn despite being included in \"mob_category\".", ConfigDataSet.CONFIG_DESCRIPTION})
         List<String> mobWhitelistRaw = ConfigDataSet.toString(Registries.ENTITY_TYPE);
         @Config(description = {"Type of shape used for calculating area in which spawns are prevented.", "This basically let's you choose between taxi cab or euclidean metrics."})
-        public ShapeType shapeType = ShapeType.ELLIPSOID;
+        public SpawnShapeType shapeType = SpawnShapeType.ELLIPSOID;
         @Config(description = "Range for preventing mob spawns on x-z-plane.")
         @Config.IntRange(min = 0)
         public int horizontalRange;
@@ -78,6 +74,12 @@ public class ServerConfig implements ConfigCore {
             this.blockedSpawnTypes = this.blockedSpawnTypesRaw.stream().map(MobSpawnType::valueOf).collect(Collectors.toSet());
             this.mobBlacklist = ConfigDataSet.from(Registries.ENTITY_TYPE, this.mobBlacklistRaw);
             this.mobWhitelist = ConfigDataSet.from(Registries.ENTITY_TYPE, this.mobWhitelistRaw);
+        }
+
+        public boolean isAffected(EntityType<?> entityType) {
+            if (this.mobWhitelist.contains(entityType)) return false;
+            if (this.mobCategories.contains(entityType.getCategory())) return true;
+            return this.mobBlacklist.contains(entityType);
         }
     }
 }

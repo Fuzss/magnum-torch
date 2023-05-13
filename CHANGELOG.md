@@ -3,6 +3,10 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog].
 
+## [v5.0.2-1.19.3] - 2023-05-13
+### Changed
+- Updated to the latest version of Puzzles Lib
+
 ## [v5.0.1-1.19.3] - 2023-03-28
 ### Fixed
 - Fixed start-up crash on Fabric due to an invalid Mixin
