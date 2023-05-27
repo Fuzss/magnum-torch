@@ -6,7 +6,7 @@ import fuzs.magnumtorch.init.ModRegistry;
 import fuzs.puzzleslib.api.config.v3.ConfigHolder;
 import fuzs.puzzleslib.api.core.v1.ModConstructor;
 import fuzs.puzzleslib.api.core.v1.context.CreativeModeTabContext;
-import fuzs.puzzleslib.api.event.v1.entity.EntityLevelEvents;
+import fuzs.puzzleslib.api.event.v1.entity.ServerEntityLevelEvents;
 import fuzs.puzzleslib.api.item.v2.CreativeModeTabConfigurator;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
@@ -27,12 +27,16 @@ public class MagnumTorch implements ModConstructor {
     }
 
     private static void registerHandlers() {
-        EntityLevelEvents.LOAD.register(MobSpawningHandler::onLivingSpawn);
+        ServerEntityLevelEvents.LOAD.register(MobSpawningHandler::onLivingSpawn);
     }
 
     @Override
     public void onRegisterCreativeModeTabs(CreativeModeTabContext context) {
-        context.registerCreativeModeTab(CreativeModeTabConfigurator.from(MOD_ID, () -> new ItemStack(ModRegistry.DIAMOND_MAGNUM_TORCH_ITEM.get())));
+        context.registerCreativeModeTab(CreativeModeTabConfigurator.from(MOD_ID, () -> new ItemStack(ModRegistry.DIAMOND_MAGNUM_TORCH_ITEM.get())).displayItems((itemDisplayParameters, output) -> {
+            output.accept(ModRegistry.DIAMOND_MAGNUM_TORCH_ITEM.get());
+            output.accept(ModRegistry.EMERALD_MAGNUM_TORCH_ITEM.get());
+            output.accept(ModRegistry.AMETHYST_MAGNUM_TORCH_ITEM.get());
+        }));
     }
 
     public static ResourceLocation id(String path) {
