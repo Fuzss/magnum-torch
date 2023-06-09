@@ -22,5 +22,6 @@
   ],
   "result": {
     "item": "magnumtorch:amethyst_magnum_torch"
-  }
+  },
+  "show_notification": true
 }

@@ -11,7 +11,9 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.material.Material;
+import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
+import net.minecraft.world.level.material.MapColor;
+import net.minecraft.world.level.material.PushReaction;
 
 public class ModRegistry {
     static final RegistryManager REGISTRY = RegistryManager.instant(MagnumTorch.MOD_ID);
@@ -27,9 +29,9 @@ public class ModRegistry {
 
     public static void touch() {
         for (MagnumTorchBlock.Type type : MagnumTorchBlock.Type.values()) {
-            RegistryReference<Block> block = REGISTRY.registerBlock(type.getSerializedName(), () -> new MagnumTorchBlock(type, BlockBehaviour.Properties.of(Material.WOOD).strength(2.5F, 3.5F).sound(SoundType.WOOD).lightLevel((p_187431_) -> {
+            RegistryReference<Block> block = REGISTRY.registerBlock(type.getSerializedName(), () -> new MagnumTorchBlock(type, BlockBehaviour.Properties.of().mapColor(MapColor.WOOD).instrument(NoteBlockInstrument.BASS).strength(2.5F, 3.5F).sound(SoundType.WOOD).lightLevel(state -> {
                 return 10;
-            }).noOcclusion()));
+            }).noOcclusion().pushReaction(PushReaction.DESTROY)));
             REGISTRY.registerBlockItem(block);
             REGISTRY.registerPoiTypeBuilder(type.getSerializedName(), () -> PoiTypeBuilder.of(0, 1, block.get()));
         }

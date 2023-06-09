@@ -30,5 +30,6 @@
     "recipes": [
       "magnumtorch:emerald_magnum_torch"
     ]
-  }
+  },
+  "sends_telemetry_event": false
 }
