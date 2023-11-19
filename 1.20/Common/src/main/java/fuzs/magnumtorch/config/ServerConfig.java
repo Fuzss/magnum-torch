@@ -50,7 +50,7 @@ public class ServerConfig implements ConfigCore {
         List<String> mobBlacklistRaw = ConfigDataSet.toString(Registries.ENTITY_TYPE);
         @Config(name = "mob_whitelist", description = {"Mobs that should still be allowed to spawn despite being included in \"mob_category\".", ConfigDataSet.CONFIG_DESCRIPTION})
         List<String> mobWhitelistRaw = ConfigDataSet.toString(Registries.ENTITY_TYPE);
-        @Config(description = {"Type of shape used for calculating area in which spawns are prevented.", "This basically let's you choose between taxi cab or euclidean metrics."})
+        @Config(description = {"Type of shape used for calculating area in which spawns are prevented.", "This basically let's you choose between maximum or euclidean metrics."})
         public SpawnShapeType shapeType = SpawnShapeType.ELLIPSOID;
         @Config(description = "Range for preventing mob spawns on x-z-plane.")
         @Config.IntRange(min = 0)
