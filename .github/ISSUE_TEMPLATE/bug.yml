@@ -1,6 +1,6 @@
 name: Report A Bug
 description: >-
-  Please note that only Minecraft versions listed on the main branch are supported. Support may additionally vary based on the severity of an issue.
+  Only Minecraft versions listed on the main branch are supported. Support may additionally vary based on the severity of an issue.
 title: "[Bug]: "
 labels: ["bug"]
 assignees:
