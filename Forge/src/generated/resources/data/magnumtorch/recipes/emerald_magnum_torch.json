@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "minecraft:emerald"
+    },
+    "G": {
+      "item": "minecraft:gold_ingot"
+    },
+    "L": {
+      "tag": "minecraft:logs"
+    },
+    "T": {
+      "item": "minecraft:fire_charge"
+    }
+  },
+  "pattern": [
+    "GTG",
+    "#L#",
+    "#L#"
+  ],
+  "result": {
+    "item": "magnumtorch:emerald_magnum_torch"
+  },
+  "show_notification": true
+}
