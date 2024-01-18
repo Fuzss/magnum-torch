@@ -1,7 +1,7 @@
 name: Leave A Suggestion
 description: >-
-  Use this template when you want to leave a suggestion. Please do not ask for mod updates or ports, they will come when they are ready.
-title: '[Suggestion]: '
+  Please do not ask for mod updates or ports, they will come when they are ready.
+title: "[Suggestion]: "
 labels: ["enhancement"]
 assignees:
   - Fuzss

@@ -1,7 +1,7 @@
 name: Submit A Crash Report
 description: >-
-  Use this template for submitting a crash report. Please note that only Minecraft versions listed on the 'main' branch are supported. Support may additionally vary based on the severity of an issue.
-title: '[Crash]: '
+  Please note that only Minecraft versions listed on the main branch are supported. Support may additionally vary based on the severity of an issue.
+title: "[Crash]: "
 labels: ["bug", "high priority"]
 assignees:
   - Fuzss
