@@ -7,3 +7,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [v20.4.0-1.20.1] - 2024-01-19
 - Ported to Minecraft 1.20.4
 - Ported to NeoForge
+### Fixed
+- Fix chickens that were part of a jockey staying behind, making the rider reappear after reloading the world
