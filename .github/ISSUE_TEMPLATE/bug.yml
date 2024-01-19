@@ -9,7 +9,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        Thanks for taking the time to fill out this template!
+        Thanks for taking the time to fill out this issue report!
   - type: dropdown
     id: loader
     attributes:
@@ -17,10 +17,11 @@ body:
       description: What mod loader are you using to play the mod?
       multiple: false
       options:
-        - Fabric
-        - NeoForge
-        - Forge
-        - Quilt
+        - "⸺"
+        - "Fabric"
+        - "NeoForge"
+        - "Forge"
+        - "Quilt"
     validations:
       required: true
   - type: input
@@ -42,10 +43,11 @@ body:
   - type: dropdown
     id: mods
     attributes:
-      label: Involved Mods (Required)
+      label: Other Mods Involved (Required)
       description: Can your issue be reproduced with a minimal set of mods (only this mod + dependencies)?
       multiple: false
       options:
+        - "⸺"
         - "Yes"
         - "No"
     validations:
