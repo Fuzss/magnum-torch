@@ -8,12 +8,8 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.RandomSource;
-import net.minecraft.util.StringRepresentable;
-import net.minecraft.world.entity.ai.village.poi.PoiType;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.level.BlockGetter;
@@ -29,7 +25,6 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraft.world.level.material.PushReaction;
 import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -38,16 +33,14 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Collection;
 import java.util.List;
 import java.util.function.Function;
-import java.util.function.Supplier;
 
-@SuppressWarnings("deprecation")
 public class MagnumTorchBlock extends Block implements SimpleWaterloggedBlock {
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
     private static final VoxelShape TORCH_AABB = Block.box(6.0D, 0.0D, 6.0D, 10.0D, 16.0D, 10.0D);
 
-    private final Type type;
+    private final MagnumTorchType type;
 
-    public MagnumTorchBlock(Type type, Properties properties) {
+    public MagnumTorchBlock(MagnumTorchType type, Properties properties) {
         super(properties);
         this.type = type;
         this.registerDefaultState(this.stateDefinition.any().setValue(WATERLOGGED, Boolean.FALSE));
@@ -126,32 +119,5 @@ public class MagnumTorchBlock extends Block implements SimpleWaterloggedBlock {
                         .withStyle(format))
                 .reduce((o1, o2) -> o1.append(", ").append(o2))
                 .orElse(Component.empty());
-    }
-
-    public enum Type implements StringRepresentable {
-        DIAMOND("diamond_magnum_torch", () -> MagnumTorch.CONFIG.get(ServerConfig.class).diamond),
-        EMERALD("emerald_magnum_torch", () -> MagnumTorch.CONFIG.get(ServerConfig.class).emerald),
-        AMETHYST("amethyst_magnum_torch", () -> MagnumTorch.CONFIG.get(ServerConfig.class).amethyst);
-
-        private final String name;
-        private final Supplier<ServerConfig.MagnumTorchConfig> config;
-
-        Type(String name, Supplier<ServerConfig.MagnumTorchConfig> config) {
-            this.name = name;
-            this.config = config;
-        }
-
-        public ServerConfig.MagnumTorchConfig getConfig() {
-            return this.config.get();
-        }
-
-        public ResourceKey<PoiType> getPoiTypeKey() {
-            return ResourceKey.create(Registries.POINT_OF_INTEREST_TYPE, MagnumTorch.id(this.name));
-        }
-
-        @Override
-        public String getSerializedName() {
-            return this.name;
-        }
     }
 }

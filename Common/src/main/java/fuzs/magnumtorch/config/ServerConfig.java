@@ -3,6 +3,7 @@ package fuzs.magnumtorch.config;
 import fuzs.puzzleslib.api.config.v3.Config;
 import fuzs.puzzleslib.api.config.v3.ConfigCore;
 import fuzs.puzzleslib.api.config.v3.serialization.ConfigDataSet;
+import fuzs.puzzleslib.api.config.v3.serialization.KeyedValueProvider;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
@@ -47,9 +48,9 @@ public class ServerConfig implements ConfigCore {
         @Config.AllowedValues(values = {"MONSTER", "CREATURE", "AMBIENT", "AXOLOTLS", "UNDERGROUND_WATER_CREATURE", "WATER_CREATURE", "WATER_AMBIENT"})
         List<String> mobCategoryRaw = Stream.of(MobCategory.MONSTER).map(Enum::name).collect(Collectors.toList());
         @Config(name = "mob_blacklist", description = {"Mobs that should not be allowed to spawn despite being absent from \"mob_category\".", ConfigDataSet.CONFIG_DESCRIPTION})
-        List<String> mobBlacklistRaw = ConfigDataSet.toString(Registries.ENTITY_TYPE);
+        List<String> mobBlacklistRaw = KeyedValueProvider.toString(Registries.ENTITY_TYPE);
         @Config(name = "mob_whitelist", description = {"Mobs that should still be allowed to spawn despite being included in \"mob_category\".", ConfigDataSet.CONFIG_DESCRIPTION})
-        List<String> mobWhitelistRaw = ConfigDataSet.toString(Registries.ENTITY_TYPE);
+        List<String> mobWhitelistRaw = KeyedValueProvider.toString(Registries.ENTITY_TYPE);
         @Config(description = {"Type of shape used for calculating area in which spawns are prevented.", "This basically let's you choose between maximum or euclidean metrics."})
         public SpawnShapeType shapeType = SpawnShapeType.ELLIPSOID;
         @Config(description = "Range for preventing mob spawns on x-z-plane.")

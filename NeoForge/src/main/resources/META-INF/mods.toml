@@ -15,11 +15,17 @@ displayURL = "${modPageUrl}"
 updateJSONURL = "${modUpdateUrl}"
 displayTest = "${modForgeDisplayTest}"
 
+[[mixins]]
+config="${modId}.common.mixins.json"
+
+[[mixins]]
+config="${modId}.neoforge.mixins.json"
+
 [[dependencies.${ modId }]]
-modId = "forge"
+modId = "neoforge"
 mandatory = true
 type = "required"
-versionRange = "[${minForgeVersion},)"
+versionRange = "[${minNeoForgeVersion},)"
 ordering = "NONE"
 side = "BOTH"
 
@@ -28,14 +34,6 @@ modId = "minecraft"
 mandatory = true
 type = "required"
 versionRange = "[${minecraftVersion}]"
-ordering = "NONE"
-side = "BOTH"
-
-[[dependencies.${ modId }]]
-modId = "forgeconfigapiport"
-mandatory = true
-type = "required"
-versionRange = "*"
 ordering = "NONE"
 side = "BOTH"
 

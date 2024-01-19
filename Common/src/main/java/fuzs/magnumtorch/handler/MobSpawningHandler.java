@@ -2,7 +2,7 @@ package fuzs.magnumtorch.handler;
 
 import fuzs.magnumtorch.MagnumTorch;
 import fuzs.magnumtorch.config.ServerConfig;
-import fuzs.magnumtorch.world.level.block.MagnumTorchBlock;
+import fuzs.magnumtorch.world.level.block.MagnumTorchType;
 import fuzs.puzzleslib.api.event.v1.core.EventResult;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceKey;
@@ -17,9 +17,9 @@ import org.jetbrains.annotations.Nullable;
 
 public class MobSpawningHandler {
 
-    public static EventResult onLivingSpawn(Entity entity, ServerLevel level, @Nullable MobSpawnType spawnType) {
+    public static EventResult onEntitySpawn(Entity entity, ServerLevel level, @Nullable MobSpawnType spawnType) {
         if (spawnType == null || !MagnumTorch.CONFIG.getHolder(ServerConfig.class).isAvailable()) return EventResult.PASS;
-        for (MagnumTorchBlock.Type type : MagnumTorchBlock.Type.values()) {
+        for (MagnumTorchType type : MagnumTorchType.values()) {
             if (isSpawnCancelled(level.getPoiManager(), entity.getType(), entity.blockPosition(), spawnType, type.getPoiTypeKey(), type.getConfig())) {
                 return EventResult.INTERRUPT;
             }

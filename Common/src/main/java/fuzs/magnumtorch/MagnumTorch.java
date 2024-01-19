@@ -27,15 +27,15 @@ public class MagnumTorch implements ModConstructor {
     }
 
     private static void registerHandlers() {
-        ServerEntityLevelEvents.LOAD.register(MobSpawningHandler::onLivingSpawn);
+        ServerEntityLevelEvents.SPAWN.register(MobSpawningHandler::onEntitySpawn);
     }
 
     @Override
     public void onRegisterCreativeModeTabs(CreativeModeTabContext context) {
-        context.registerCreativeModeTab(CreativeModeTabConfigurator.from(MOD_ID, () -> new ItemStack(ModRegistry.DIAMOND_MAGNUM_TORCH_ITEM.get())).displayItems((itemDisplayParameters, output) -> {
-            output.accept(ModRegistry.DIAMOND_MAGNUM_TORCH_ITEM.get());
-            output.accept(ModRegistry.EMERALD_MAGNUM_TORCH_ITEM.get());
-            output.accept(ModRegistry.AMETHYST_MAGNUM_TORCH_ITEM.get());
+        context.registerCreativeModeTab(CreativeModeTabConfigurator.from(MOD_ID, () -> new ItemStack(ModRegistry.DIAMOND_MAGNUM_TORCH_ITEM)).displayItems((itemDisplayParameters, output) -> {
+            output.accept(ModRegistry.DIAMOND_MAGNUM_TORCH_ITEM.value());
+            output.accept(ModRegistry.EMERALD_MAGNUM_TORCH_ITEM.value());
+            output.accept(ModRegistry.AMETHYST_MAGNUM_TORCH_ITEM.value());
         }));
     }
 
