@@ -17,10 +17,11 @@ body:
       description: What mod loader are you using to play the mod?
       multiple: false
       options:
-        - Fabric
-        - NeoForge
-        - Forge
-        - Quilt
+        - "⸺"
+        - "Fabric"
+        - "NeoForge"
+        - "Forge"
+        - "Quilt"
     validations:
       required: true
   - type: input
@@ -46,8 +47,11 @@ body:
       description: Can your issue be reproduced with a minimal set of mods (only this mod + dependencies)?
       multiple: false
       options:
-        - "No"
+        - "⸺"
         - "Yes"
+        - "No"
+    validations:
+      required: true
   - type: textarea
     id: notes
     attributes:
