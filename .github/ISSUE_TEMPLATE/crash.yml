@@ -42,14 +42,12 @@ body:
   - type: dropdown
     id: mods
     attributes:
-      label: Involved Mods (Required)
+      label: Other Mods Involved (Required)
       description: Can your issue be reproduced with a minimal set of mods (only this mod + dependencies)?
       multiple: false
       options:
-        - "Yes"
         - "No"
-    validations:
-      required: true
+        - "Yes"
   - type: textarea
     id: notes
     attributes:
