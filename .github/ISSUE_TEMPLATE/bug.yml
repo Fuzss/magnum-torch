@@ -40,21 +40,21 @@ body:
     validations:
       required: true
   - type: dropdown
-    id: loader
+    id: mods
     attributes:
       label: Involved Mods (Required)
       description: Can your issue be reproduced with a minimal set of mods (only this mod + dependencies)?
       multiple: false
       options:
-        - Yes
-        - No
+        - "Yes"
+        - "No"
     validations:
       required: true
   - type: textarea
     id: notes
     attributes:
       label: Notes (Required)
-      description: Please explain what happens because of the bug (including all the steps required to cause the bug), and what behavior you would expect if the bug were fixed.
+      description: Please explain what happens because of the issue (including all the steps required to cause it), and what behavior you would expect if the issue were fixed.
       placeholder: >-
         ex.  
         
