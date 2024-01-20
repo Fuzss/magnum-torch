@@ -28,8 +28,8 @@ public class MagnumTorch implements ModConstructor {
     }
 
     private static void registerHandlers() {
-        ServerTickEvents.END.register(MobSpawningHandler::onEndServerTick);
         ServerEntityLevelEvents.SPAWN.register(MobSpawningHandler::onEntitySpawn);
+        ServerTickEvents.END.register(MobSpawningHandler::onEndServerTick);
     }
 
     @Override
