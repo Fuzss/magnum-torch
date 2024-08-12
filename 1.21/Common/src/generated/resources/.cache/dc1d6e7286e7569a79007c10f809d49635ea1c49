@@ -1,4 +1,4 @@
-// 1.20.4	2024-01-19T13:05:46.848621	Block Loot Tables
-7763c51d13549df002cc3ed28012f3f342f51a7c data/magnumtorch/loot_tables/blocks/amethyst_magnum_torch.json
-5b18de1b79d352da34193667916874f0c048412a data/magnumtorch/loot_tables/blocks/diamond_magnum_torch.json
-08afead32838ddb5927e6f508f7ddfc511f7e83a data/magnumtorch/loot_tables/blocks/emerald_magnum_torch.json
+// 1.21	2024-08-12T17:12:47.784635	Block Loot Tables
+7763c51d13549df002cc3ed28012f3f342f51a7c data/magnumtorch/loot_table/blocks/amethyst_magnum_torch.json
+5b18de1b79d352da34193667916874f0c048412a data/magnumtorch/loot_table/blocks/diamond_magnum_torch.json
+08afead32838ddb5927e6f508f7ddfc511f7e83a data/magnumtorch/loot_table/blocks/emerald_magnum_torch.json

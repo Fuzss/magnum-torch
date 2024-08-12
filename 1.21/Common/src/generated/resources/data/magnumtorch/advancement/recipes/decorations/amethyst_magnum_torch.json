@@ -1,13 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_diamond": {
+    "has_amethyst_shard": {
       "conditions": {
         "items": [
           {
-            "items": [
-              "minecraft:diamond"
-            ]
+            "items": "minecraft:amethyst_shard"
           }
         ]
       },
@@ -15,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "magnumtorch:diamond_magnum_torch"
+        "recipe": "magnumtorch:amethyst_magnum_torch"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -23,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_diamond"
+      "has_amethyst_shard"
     ]
   ],
   "rewards": {
     "recipes": [
-      "magnumtorch:diamond_magnum_torch"
+      "magnumtorch:amethyst_magnum_torch"
     ]
   }
 }
