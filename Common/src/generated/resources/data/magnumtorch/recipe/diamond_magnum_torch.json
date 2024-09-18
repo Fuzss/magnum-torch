@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "minecraft:diamond"
+    },
+    "G": {
+      "item": "minecraft:gold_ingot"
+    },
+    "L": {
+      "tag": "minecraft:logs"
+    },
+    "T": {
+      "item": "minecraft:fire_charge"
+    }
+  },
+  "pattern": [
+    "GTG",
+    "#L#",
+    "#L#"
+  ],
+  "result": {
+    "count": 1,
+    "id": "magnumtorch:diamond_magnum_torch"
+  }
+}

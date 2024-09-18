@@ -1,0 +1,14 @@
+{
+  "block.magnumtorch.diamond_magnum_torch": "다이아몬드 매그넘 횃불",
+  "block.magnumtorch.emerald_magnum_torch": "에메랄드 매그넘 횃불",
+  "block.magnumtorch.amethyst_magnum_torch": "자수정 매그넘 횃불",
+  "block.magnumtorch.magnum_torch.info": "넓은 지역에서 몬스터의 스폰을 막습니다.",
+  "block.magnumtorch.magnum_torch.info.more": "더 자세한 정보는 %s를 누르세요.",
+  "block.magnumtorch.magnum_torch.info.shift": "Shift",
+  "block.magnumtorch.magnum_torch.info.mob_types": "몬스터 종류: %s",
+  "block.magnumtorch.magnum_torch.info.blacklist": "블랙리스트: %s",
+  "block.magnumtorch.magnum_torch.info.whitelist": "화이트리스트: %s",
+  "block.magnumtorch.magnum_torch.info.shape_type": "도형 종류: %s",
+  "block.magnumtorch.magnum_torch.info.horizontal_range": "수평 범위: %s",
+  "block.magnumtorch.magnum_torch.info.vertical_range": "수직 범위: %s"
+}

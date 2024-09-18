@@ -1,0 +1,6 @@
+{
+  "parent": "magnumtorch:block/magnum_torch",
+  "textures": {
+    "texture": "magnumtorch:block/diamond_magnum_torch"
+  }
+}
