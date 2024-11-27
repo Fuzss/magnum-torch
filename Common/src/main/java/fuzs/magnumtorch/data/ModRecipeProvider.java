@@ -17,7 +17,9 @@ public class ModRecipeProvider extends AbstractRecipeProvider {
 
     @Override
     public void addRecipes(RecipeOutput recipeOutput) {
-        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, ModRegistry.DIAMOND_MAGNUM_TORCH_BLOCK.value())
+        ShapedRecipeBuilder.shaped(this.items(),
+                        RecipeCategory.DECORATIONS,
+                        ModRegistry.DIAMOND_MAGNUM_TORCH_BLOCK.value())
                 .define('L', ItemTags.LOGS)
                 .define('T', Items.FIRE_CHARGE)
                 .define('G', Items.GOLD_INGOT)
@@ -25,9 +27,11 @@ public class ModRecipeProvider extends AbstractRecipeProvider {
                 .pattern("GTG")
                 .pattern("#L#")
                 .pattern("#L#")
-                .unlockedBy(getHasName(Items.DIAMOND), has(Items.DIAMOND))
+                .unlockedBy(getHasName(Items.DIAMOND), this.has(Items.DIAMOND))
                 .save(recipeOutput);
-        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, ModRegistry.EMERALD_MAGNUM_TORCH_BLOCK.value())
+        ShapedRecipeBuilder.shaped(this.items(),
+                        RecipeCategory.DECORATIONS,
+                        ModRegistry.EMERALD_MAGNUM_TORCH_BLOCK.value())
                 .define('L', ItemTags.LOGS)
                 .define('T', Items.FIRE_CHARGE)
                 .define('G', Items.GOLD_INGOT)
@@ -35,9 +39,11 @@ public class ModRecipeProvider extends AbstractRecipeProvider {
                 .pattern("GTG")
                 .pattern("#L#")
                 .pattern("#L#")
-                .unlockedBy(getHasName(Items.EMERALD), has(Items.EMERALD))
+                .unlockedBy(getHasName(Items.EMERALD), this.has(Items.EMERALD))
                 .save(recipeOutput);
-        ShapedRecipeBuilder.shaped(RecipeCategory.DECORATIONS, ModRegistry.AMETHYST_MAGNUM_TORCH_BLOCK.value())
+        ShapedRecipeBuilder.shaped(this.items(),
+                        RecipeCategory.DECORATIONS,
+                        ModRegistry.AMETHYST_MAGNUM_TORCH_BLOCK.value())
                 .define('L', ItemTags.LOGS)
                 .define('T', Items.FIRE_CHARGE)
                 .define('G', Items.GOLD_INGOT)
@@ -45,7 +51,7 @@ public class ModRecipeProvider extends AbstractRecipeProvider {
                 .pattern("GTG")
                 .pattern("#L#")
                 .pattern("#L#")
-                .unlockedBy(getHasName(Items.AMETHYST_SHARD), has(Items.AMETHYST_SHARD))
+                .unlockedBy(getHasName(Items.AMETHYST_SHARD), this.has(Items.AMETHYST_SHARD))
                 .save(recipeOutput);
     }
 }
