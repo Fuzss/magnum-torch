@@ -63,6 +63,9 @@ public class MagnumTorchBlock extends Block implements SimpleWaterloggedBlock {
 
     @Override
     protected BlockState updateShape(BlockState blockState, LevelReader levelReader, ScheduledTickAccess scheduledTickAccess, BlockPos blockPos, Direction direction, BlockPos blockPos2, BlockState blockState2, RandomSource randomSource) {
+        if (blockState.getValue(WATERLOGGED)) {
+            scheduledTickAccess.scheduleTick(blockPos, Fluids.WATER, Fluids.WATER.getTickDelay(levelReader));
+        }
         return direction == Direction.DOWN && !this.canSurvive(blockState, levelReader, blockPos) ?
                 Blocks.AIR.defaultBlockState() : super.updateShape(blockState,
                 levelReader,
