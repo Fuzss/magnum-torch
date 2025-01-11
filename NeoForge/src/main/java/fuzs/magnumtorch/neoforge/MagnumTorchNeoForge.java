@@ -13,8 +13,9 @@ public class MagnumTorchNeoForge {
 
     public MagnumTorchNeoForge() {
         ModConstructor.construct(MagnumTorch.MOD_ID, MagnumTorch::new);
-        DataProviderHelper.registerDataProviders(MagnumTorch.MOD_ID, ModBlockTagsProvider::new,
-                ModLootTableProvider::new, ModRecipeProvider::new
-        );
+        DataProviderHelper.registerDataProviders(MagnumTorch.MOD_ID,
+                ModBlockTagsProvider::new,
+                ModLootTableProvider::new,
+                ModRecipeProvider::new);
     }
 }
