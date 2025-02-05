@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "magnumtorch:block/diamond_magnum_torch"
+    }
+  }
+}
