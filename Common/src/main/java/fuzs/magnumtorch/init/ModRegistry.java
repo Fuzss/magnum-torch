@@ -7,6 +7,7 @@ import fuzs.puzzleslib.api.init.v3.registry.RegistryManager;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.entity.ai.village.poi.PoiType;
+import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
@@ -36,11 +37,13 @@ public class ModRegistry {
             MagnumTorchType.EMERALD.getSerializedName());
     public static final Holder.Reference<PoiType> AMETHYST_MAGNUM_TORCH_POI_TYPE = REGISTRIES.registerLazily(Registries.POINT_OF_INTEREST_TYPE,
             MagnumTorchType.AMETHYST.getSerializedName());
+    public static final Holder.Reference<CreativeModeTab> CREATIVE_MODE_TAB = REGISTRIES.registerCreativeModeTab(
+            DIAMOND_MAGNUM_TORCH_ITEM);
 
     public static void bootstrap() {
-        for (MagnumTorchType type : MagnumTorchType.values()) {
-            Holder.Reference<Block> block = REGISTRIES.registerBlock(type.getSerializedName(),
-                    (BlockBehaviour.Properties properties) -> new MagnumTorchBlock(type, properties),
+        for (MagnumTorchType magnumTorchType : MagnumTorchType.values()) {
+            Holder.Reference<Block> block = REGISTRIES.registerBlock(magnumTorchType.getSerializedName(),
+                    (BlockBehaviour.Properties properties) -> new MagnumTorchBlock(magnumTorchType, properties),
                     () -> BlockBehaviour.Properties.of()
                             .mapColor(MapColor.WOOD)
                             .instrument(NoteBlockInstrument.BASS)
@@ -52,7 +55,7 @@ public class ModRegistry {
                             .noOcclusion()
                             .pushReaction(PushReaction.DESTROY));
             REGISTRIES.registerBlockItem(block);
-            REGISTRIES.registerPoiType(type.getSerializedName(), block);
+            REGISTRIES.registerPoiType(magnumTorchType.getSerializedName(), block);
         }
     }
 }

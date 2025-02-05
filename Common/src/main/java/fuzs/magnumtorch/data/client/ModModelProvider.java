@@ -3,18 +3,19 @@ package fuzs.magnumtorch.data.client;
 import fuzs.magnumtorch.MagnumTorch;
 import fuzs.magnumtorch.init.ModRegistry;
 import fuzs.puzzleslib.api.client.data.v2.AbstractModelProvider;
+import fuzs.puzzleslib.api.client.data.v2.models.ModelTemplateHelper;
 import fuzs.puzzleslib.api.data.v2.core.DataProviderContext;
-import net.minecraft.data.models.BlockModelGenerators;
-import net.minecraft.data.models.model.ModelTemplate;
-import net.minecraft.data.models.model.TextureMapping;
-import net.minecraft.data.models.model.TextureSlot;
-import net.minecraft.data.models.model.TexturedModel;
+import net.minecraft.client.data.models.BlockModelGenerators;
+import net.minecraft.client.data.models.model.ModelTemplate;
+import net.minecraft.client.data.models.model.TextureMapping;
+import net.minecraft.client.data.models.model.TextureSlot;
+import net.minecraft.client.data.models.model.TexturedModel;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 
 public class ModModelProvider extends AbstractModelProvider {
-    public static final ModelTemplate MAGNUM_TORCH = createBlockModelTemplate(MagnumTorch.id("template_magnum_torch"),
-            TextureSlot.SIDE);
+    public static final ModelTemplate MAGNUM_TORCH = ModelTemplateHelper.createBlockModelTemplate(MagnumTorch.id(
+            "template_magnum_torch"), TextureSlot.SIDE);
     public static final TexturedModel.Provider MAGNUM_TORCH_SIDE = TexturedModel.createDefault((Block block) -> TextureMapping.singleSlot(
             TextureSlot.SIDE,
             TextureMapping.getBlockTexture(block, "_side")), MAGNUM_TORCH);

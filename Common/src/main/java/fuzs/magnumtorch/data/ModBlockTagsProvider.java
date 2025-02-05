@@ -16,9 +16,9 @@ public class ModBlockTagsProvider extends AbstractTagProvider<Block> {
 
     @Override
     public void addTags(HolderLookup.Provider provider) {
-        this.add(BlockTags.MINEABLE_WITH_AXE)
-                .add(ModRegistry.DIAMOND_MAGNUM_TORCH_BLOCK.value(), ModRegistry.EMERALD_MAGNUM_TORCH_BLOCK.value(),
-                        ModRegistry.AMETHYST_MAGNUM_TORCH_BLOCK.value()
-                );
+        this.tag(BlockTags.MINEABLE_WITH_AXE)
+                .add(ModRegistry.DIAMOND_MAGNUM_TORCH_BLOCK.value(),
+                        ModRegistry.EMERALD_MAGNUM_TORCH_BLOCK.value(),
+                        ModRegistry.AMETHYST_MAGNUM_TORCH_BLOCK.value());
     }
 }
