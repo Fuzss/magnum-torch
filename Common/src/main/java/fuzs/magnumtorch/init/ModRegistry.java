@@ -19,43 +19,50 @@ import net.minecraft.world.level.material.PushReaction;
 
 public class ModRegistry {
     public static final RegistryManager REGISTRIES = RegistryManager.from(MagnumTorch.MOD_ID);
-    public static final Holder.Reference<Block> DIAMOND_MAGNUM_TORCH_BLOCK = REGISTRIES.registerLazily(Registries.BLOCK,
-            MagnumTorchType.DIAMOND.getSerializedName());
-    public static final Holder.Reference<Block> EMERALD_MAGNUM_TORCH_BLOCK = REGISTRIES.registerLazily(Registries.BLOCK,
-            MagnumTorchType.EMERALD.getSerializedName());
-    public static final Holder.Reference<Block> AMETHYST_MAGNUM_TORCH_BLOCK = REGISTRIES.registerLazily(Registries.BLOCK,
-            MagnumTorchType.AMETHYST.getSerializedName());
-    public static final Holder.Reference<Item> DIAMOND_MAGNUM_TORCH_ITEM = REGISTRIES.registerLazily(Registries.ITEM,
-            MagnumTorchType.DIAMOND.getSerializedName());
-    public static final Holder.Reference<Item> EMERALD_MAGNUM_TORCH_ITEM = REGISTRIES.registerLazily(Registries.ITEM,
-            MagnumTorchType.EMERALD.getSerializedName());
-    public static final Holder.Reference<Item> AMETHYST_MAGNUM_TORCH_ITEM = REGISTRIES.registerLazily(Registries.ITEM,
-            MagnumTorchType.AMETHYST.getSerializedName());
-    public static final Holder.Reference<PoiType> DIAMOND_MAGNUM_TORCH_POI_TYPE = REGISTRIES.registerLazily(Registries.POINT_OF_INTEREST_TYPE,
-            MagnumTorchType.DIAMOND.getSerializedName());
-    public static final Holder.Reference<PoiType> EMERALD_MAGNUM_TORCH_POI_TYPE = REGISTRIES.registerLazily(Registries.POINT_OF_INTEREST_TYPE,
-            MagnumTorchType.EMERALD.getSerializedName());
-    public static final Holder.Reference<PoiType> AMETHYST_MAGNUM_TORCH_POI_TYPE = REGISTRIES.registerLazily(Registries.POINT_OF_INTEREST_TYPE,
-            MagnumTorchType.AMETHYST.getSerializedName());
+    public static final Holder.Reference<Block> DIAMOND_MAGNUM_TORCH_BLOCK = REGISTRIES.registerBlock(
+            "diamond_magnum_torch",
+            (BlockBehaviour.Properties properties) -> new MagnumTorchBlock(MagnumTorchType.DIAMOND, properties),
+            ModRegistry::magnumTorchProperties);
+    public static final Holder.Reference<Block> EMERALD_MAGNUM_TORCH_BLOCK = REGISTRIES.registerBlock(
+            "emerald_magnum_torch",
+            (BlockBehaviour.Properties properties) -> new MagnumTorchBlock(MagnumTorchType.EMERALD, properties),
+            ModRegistry::magnumTorchProperties);
+    public static final Holder.Reference<Block> AMETHYST_MAGNUM_TORCH_BLOCK = REGISTRIES.registerBlock(
+            "amethyst_magnum_torch",
+            (BlockBehaviour.Properties properties) -> new MagnumTorchBlock(MagnumTorchType.AMETHYST, properties),
+            ModRegistry::magnumTorchProperties);
+    public static final Holder.Reference<Item> DIAMOND_MAGNUM_TORCH_ITEM = REGISTRIES.registerBlockItem(
+            DIAMOND_MAGNUM_TORCH_BLOCK);
+    public static final Holder.Reference<Item> EMERALD_MAGNUM_TORCH_ITEM = REGISTRIES.registerBlockItem(
+            EMERALD_MAGNUM_TORCH_BLOCK);
+    public static final Holder.Reference<Item> AMETHYST_MAGNUM_TORCH_ITEM = REGISTRIES.registerBlockItem(
+            AMETHYST_MAGNUM_TORCH_BLOCK);
+    public static final Holder.Reference<PoiType> DIAMOND_MAGNUM_TORCH_POI_TYPE = REGISTRIES.registerPoiType(
+            "diamond_magnum_torch",
+            DIAMOND_MAGNUM_TORCH_BLOCK);
+    public static final Holder.Reference<PoiType> EMERALD_MAGNUM_TORCH_POI_TYPE = REGISTRIES.registerPoiType(
+            "emerald_magnum_torch",
+            EMERALD_MAGNUM_TORCH_BLOCK);
+    public static final Holder.Reference<PoiType> AMETHYST_MAGNUM_TORCH_POI_TYPE = REGISTRIES.registerPoiType(
+            "amethyst_magnum_torch",
+            AMETHYST_MAGNUM_TORCH_BLOCK);
     public static final Holder.Reference<CreativeModeTab> CREATIVE_MODE_TAB = REGISTRIES.registerCreativeModeTab(
             DIAMOND_MAGNUM_TORCH_ITEM);
 
     public static void bootstrap() {
-        for (MagnumTorchType magnumTorchType : MagnumTorchType.values()) {
-            Holder.Reference<Block> block = REGISTRIES.registerBlock(magnumTorchType.getSerializedName(),
-                    (BlockBehaviour.Properties properties) -> new MagnumTorchBlock(magnumTorchType, properties),
-                    () -> BlockBehaviour.Properties.of()
-                            .mapColor(MapColor.WOOD)
-                            .instrument(NoteBlockInstrument.BASS)
-                            .strength(2.5F, 3.5F)
-                            .sound(SoundType.WOOD)
-                            .lightLevel((BlockState blockState) -> {
-                                return 10;
-                            })
-                            .noOcclusion()
-                            .pushReaction(PushReaction.DESTROY));
-            REGISTRIES.registerBlockItem(block);
-            REGISTRIES.registerPoiType(magnumTorchType.getSerializedName(), block);
-        }
+        REGISTRIES.register(Registries.BLOCK_TYPE, "magnum_torch", () -> MagnumTorchBlock.CODEC);
+    }
+
+    private static BlockBehaviour.Properties magnumTorchProperties() {
+        return BlockBehaviour.Properties.of()
+                .mapColor(MapColor.WOOD)
+                .instrument(NoteBlockInstrument.BASS)
+                .strength(2.5F, 3.5F)
+                .sound(SoundType.WOOD)
+                .lightLevel((BlockState blockState) -> {
+                    return 10;
+                })
+                .noOcclusion()
+                .pushReaction(PushReaction.DESTROY);
     }
 }

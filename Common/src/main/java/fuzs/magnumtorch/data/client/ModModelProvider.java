@@ -33,6 +33,7 @@ public class ModModelProvider extends AbstractModelProvider {
 
     private void createMagnumTorch(Block block, BlockModelGenerators builder) {
         ResourceLocation resourceLocation = MAGNUM_TORCH_SIDE.create(block, builder.modelOutput);
-        builder.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(block, resourceLocation));
+        builder.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(block,
+                BlockModelGenerators.plainVariant(resourceLocation)));
     }
 }

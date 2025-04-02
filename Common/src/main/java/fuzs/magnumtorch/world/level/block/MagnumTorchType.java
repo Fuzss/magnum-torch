@@ -2,34 +2,57 @@ package fuzs.magnumtorch.world.level.block;
 
 import fuzs.magnumtorch.MagnumTorch;
 import fuzs.magnumtorch.config.ServerConfig;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceKey;
+import fuzs.magnumtorch.init.ModRegistry;
+import net.minecraft.core.Holder;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.entity.ai.village.poi.PoiType;
 
-import java.util.function.Supplier;
+import java.util.Locale;
 
 public enum MagnumTorchType implements StringRepresentable {
-    DIAMOND("diamond_magnum_torch", () -> MagnumTorch.CONFIG.get(ServerConfig.class).diamond), EMERALD("emerald_magnum_torch", () -> MagnumTorch.CONFIG.get(ServerConfig.class).emerald), AMETHYST("amethyst_magnum_torch", () -> MagnumTorch.CONFIG.get(ServerConfig.class).amethyst);
+    DIAMOND {
+        @Override
+        public ServerConfig.MagnumTorchConfig getConfig() {
+            return MagnumTorch.CONFIG.get(ServerConfig.class).diamond;
+        }
 
-    private final String name;
-    private final Supplier<ServerConfig.MagnumTorchConfig> config;
+        @Override
+        public Holder.Reference<PoiType> getPoiType() {
+            return ModRegistry.DIAMOND_MAGNUM_TORCH_POI_TYPE;
+        }
+    },
+    EMERALD {
+        @Override
+        public ServerConfig.MagnumTorchConfig getConfig() {
+            return MagnumTorch.CONFIG.get(ServerConfig.class).emerald;
+        }
 
-    MagnumTorchType(String name, Supplier<ServerConfig.MagnumTorchConfig> config) {
-        this.name = name;
-        this.config = config;
-    }
+        @Override
+        public Holder.Reference<PoiType> getPoiType() {
+            return ModRegistry.EMERALD_MAGNUM_TORCH_POI_TYPE;
+        }
+    },
+    AMETHYST {
+        @Override
+        public ServerConfig.MagnumTorchConfig getConfig() {
+            return MagnumTorch.CONFIG.get(ServerConfig.class).amethyst;
+        }
 
-    public ServerConfig.MagnumTorchConfig getConfig() {
-        return this.config.get();
-    }
+        @Override
+        public Holder.Reference<PoiType> getPoiType() {
+            return ModRegistry.AMETHYST_MAGNUM_TORCH_POI_TYPE;
+        }
+    };
 
-    public ResourceKey<PoiType> getPoiTypeKey() {
-        return ResourceKey.create(Registries.POINT_OF_INTEREST_TYPE, MagnumTorch.id(this.name));
-    }
+    public static final StringRepresentable.EnumCodec<MagnumTorchType> CODEC = StringRepresentable.fromEnum(
+            MagnumTorchType::values);
+
+    public abstract ServerConfig.MagnumTorchConfig getConfig();
+
+    public abstract Holder.Reference<PoiType> getPoiType();
 
     @Override
     public String getSerializedName() {
-        return this.name;
+        return this.name().toLowerCase(Locale.ROOT);
     }
 }

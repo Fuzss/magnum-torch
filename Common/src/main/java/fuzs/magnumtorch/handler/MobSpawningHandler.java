@@ -30,7 +30,7 @@ public class MobSpawningHandler {
                     entity.getType(),
                     entity.blockPosition(),
                     spawnType,
-                    type.getPoiTypeKey(),
+                    type.getPoiType().key(),
                     type.getConfig())) {
                 // collect for running at the end of this server tick, other passengers might still be added to the level after this,
                 // and calling Entity::discard to early for them will log an annoying warning
