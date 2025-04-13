@@ -5,9 +5,13 @@ import fuzs.magnumtorch.MagnumTorch;
 import fuzs.magnumtorch.config.ServerConfig;
 import fuzs.magnumtorch.world.level.block.MagnumTorchBlock;
 import net.minecraft.ChatFormatting;
+import net.minecraft.Util;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
+import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -20,27 +24,27 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 
 public class TorchTooltipHelper {
-    public static final String TRANSLATION_KEY_MAGNUM_TORCH_INFO = "block." + MagnumTorch.MOD_ID + ".magnum_torch.info";
-    public static final String TRANSLATION_KEY_MAGNUM_TORCH_MORE = TRANSLATION_KEY_MAGNUM_TORCH_INFO + ".more";
-    public static final String TRANSLATION_KEY_MAGNUM_TORCH_SHIFT = TRANSLATION_KEY_MAGNUM_TORCH_INFO + ".shift";
 
     public static void appendHoverText(MagnumTorchBlock block, ItemStack itemStack, Item.TooltipContext tooltipContext, TooltipFlag tooltipFlag, Consumer<Component> tooltipLineConsumer) {
-        tooltipLineConsumer.accept(Component.translatable(TRANSLATION_KEY_MAGNUM_TORCH_INFO)
+        tooltipLineConsumer.accept(Component.translatable(TooltipComponent.DESCRIPTION.getTranslationKey())
                 .withStyle(ChatFormatting.GRAY));
         if (!Screen.hasShiftDown()) {
-            tooltipLineConsumer.accept(Component.translatable(TRANSLATION_KEY_MAGNUM_TORCH_MORE,
-                            Component.translatable(TRANSLATION_KEY_MAGNUM_TORCH_SHIFT).withStyle(ChatFormatting.YELLOW))
+            tooltipLineConsumer.accept(Component.translatable(TooltipComponent.ADDITIONAL.getTranslationKey(),
+                            Component.translatable(TooltipComponent.SHIFT.getTranslationKey()).withStyle(ChatFormatting.YELLOW))
                     .withStyle(ChatFormatting.GRAY));
-        } else if (MagnumTorch.CONFIG.getHolder(ServerConfig.class).isAvailable()) {
-            for (DescriptionComponent descriptionComponent : DescriptionComponent.values()) {
-                if (descriptionComponent.notEmptyChecker.test(block.getType().getConfig())) {
-                    tooltipLineConsumer.accept(descriptionComponent.getComponent(block.getType().getConfig()));
+        } else {
+            for (TooltipComponent tooltipComponent : TooltipComponent.values()) {
+                if (tooltipComponent.notEmptyChecker.test(block.getType().getConfig())) {
+                    tooltipLineConsumer.accept(tooltipComponent.getComponent(block.getType().getConfig()));
                 }
             }
         }
     }
 
-    public enum DescriptionComponent {
+    public enum TooltipComponent implements StringRepresentable {
+        DESCRIPTION,
+        ADDITIONAL,
+        SHIFT,
         MOB_TYPES((ServerConfig.MagnumTorchConfig config) -> !config.mobCategories.isEmpty(),
                 (ServerConfig.MagnumTorchConfig config) -> {
                     return mergeComponentList(config.mobCategories, ChatFormatting.YELLOW, Enum::name);
@@ -70,27 +74,32 @@ public class TorchTooltipHelper {
         final Predicate<ServerConfig.MagnumTorchConfig> notEmptyChecker;
         final Function<ServerConfig.MagnumTorchConfig, Component> componentFactory;
 
-        DescriptionComponent(Function<ServerConfig.MagnumTorchConfig, Component> componentFactory) {
+        TooltipComponent() {
+            this(Predicates.alwaysFalse(), (ServerConfig.MagnumTorchConfig config) -> CommonComponents.EMPTY);
+        }
+
+        TooltipComponent(Function<ServerConfig.MagnumTorchConfig, Component> componentFactory) {
             this(Predicates.alwaysTrue(), componentFactory);
         }
 
-        DescriptionComponent(Predicate<ServerConfig.MagnumTorchConfig> notEmptyChecker, Function<ServerConfig.MagnumTorchConfig, Component> componentFactory) {
+        TooltipComponent(Predicate<ServerConfig.MagnumTorchConfig> notEmptyChecker, Function<ServerConfig.MagnumTorchConfig, Component> componentFactory) {
             this.notEmptyChecker = notEmptyChecker;
             this.componentFactory = componentFactory;
         }
 
-        @Override
-        public String toString() {
-            return this.name().toLowerCase(Locale.ROOT);
-        }
-
         public String getTranslationKey() {
-            return TRANSLATION_KEY_MAGNUM_TORCH_INFO + "." + this;
+            return Util.makeDescriptionId(Registries.elementsDirPath(Registries.BLOCK),
+                    MagnumTorch.id("magnum_torch")) + ".tooltip." + this.getSerializedName();
         }
 
         public Component getComponent(ServerConfig.MagnumTorchConfig config) {
             Component component = this.componentFactory.apply(config);
             return Component.translatable(this.getTranslationKey(), component).withStyle(ChatFormatting.GRAY);
+        }
+
+        @Override
+        public String getSerializedName() {
+            return this.name().toLowerCase(Locale.ROOT);
         }
 
         private static <T> Component mergeComponentList(Collection<? extends T> collection, ChatFormatting format, Function<T, String> keyExtractor) {

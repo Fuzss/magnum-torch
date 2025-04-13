@@ -18,14 +18,14 @@ public class ModLanguageProvider extends AbstractLanguageProvider {
         builder.add(ModRegistry.DIAMOND_MAGNUM_TORCH_BLOCK.value(), "Diamond Magnum Torch");
         builder.add(ModRegistry.EMERALD_MAGNUM_TORCH_BLOCK.value(), "Emerald Magnum Torch");
         builder.add(ModRegistry.AMETHYST_MAGNUM_TORCH_BLOCK.value(), "Amethyst Magnum Torch");
-        builder.add(TorchTooltipHelper.TRANSLATION_KEY_MAGNUM_TORCH_INFO, "Prevents mob spawns in a huge area.");
-        builder.add(TorchTooltipHelper.TRANSLATION_KEY_MAGNUM_TORCH_MORE, "Hold %s for more information");
-        builder.add(TorchTooltipHelper.TRANSLATION_KEY_MAGNUM_TORCH_SHIFT, "Shift");
-        builder.add(TorchTooltipHelper.DescriptionComponent.MOB_TYPES.getTranslationKey(), "Mob Type(s): %s");
-        builder.add(TorchTooltipHelper.DescriptionComponent.BLACKLIST.getTranslationKey(), "Blacklist: %s");
-        builder.add(TorchTooltipHelper.DescriptionComponent.WHITELIST.getTranslationKey(), "Whitelist: %s");
-        builder.add(TorchTooltipHelper.DescriptionComponent.SHAPE_TYPE.getTranslationKey(), "Shape Type: %s");
-        builder.add(TorchTooltipHelper.DescriptionComponent.HORIZONTAL_RANGE.getTranslationKey(), "Horizontal Range: %s");
-        builder.add(TorchTooltipHelper.DescriptionComponent.VERTICAL_RANGE.getTranslationKey(), "Vertical Range: %s");
+        builder.add(TorchTooltipHelper.TooltipComponent.DESCRIPTION.getTranslationKey(), "Prevents mob spawns in a huge area.");
+        builder.add(TorchTooltipHelper.TooltipComponent.ADDITIONAL.getTranslationKey(), "Hold %s for more information");
+        builder.add(TorchTooltipHelper.TooltipComponent.SHIFT.getTranslationKey(), "Shift");
+        builder.add(TorchTooltipHelper.TooltipComponent.MOB_TYPES.getTranslationKey(), "Mob Type(s): %s");
+        builder.add(TorchTooltipHelper.TooltipComponent.BLACKLIST.getTranslationKey(), "Blacklist: %s");
+        builder.add(TorchTooltipHelper.TooltipComponent.WHITELIST.getTranslationKey(), "Whitelist: %s");
+        builder.add(TorchTooltipHelper.TooltipComponent.SHAPE_TYPE.getTranslationKey(), "Shape Type: %s");
+        builder.add(TorchTooltipHelper.TooltipComponent.HORIZONTAL_RANGE.getTranslationKey(), "Horizontal Range: %s");
+        builder.add(TorchTooltipHelper.TooltipComponent.VERTICAL_RANGE.getTranslationKey(), "Vertical Range: %s");
     }
 }
