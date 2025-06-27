@@ -25,7 +25,7 @@ public class MagnumTorch implements ModConstructor {
     }
 
     private static void registerEventHandlers() {
-        ServerEntityLevelEvents.SPAWN.register(MobSpawningHandler::onEntitySpawn);
+        ServerEntityLevelEvents.LOAD.register(MobSpawningHandler::onEntityLoad);
     }
 
     public static ResourceLocation id(String path) {

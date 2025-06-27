@@ -13,32 +13,32 @@ import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.TooltipFlag;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Locale;
-import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
 public class TorchTooltipHelper {
 
-    public static void appendHoverText(MagnumTorchBlock block, ItemStack itemStack, Item.TooltipContext tooltipContext, TooltipFlag tooltipFlag, Consumer<Component> tooltipLineConsumer) {
-        tooltipLineConsumer.accept(Component.translatable(TooltipComponent.DESCRIPTION.getTranslationKey())
+    public static List<Component> appendHoverText(MagnumTorchBlock block) {
+        List<Component> tooltipLines = new ArrayList<>();
+        tooltipLines.add(Component.translatable(TooltipComponent.DESCRIPTION.getTranslationKey())
                 .withStyle(ChatFormatting.GRAY));
         if (!Screen.hasShiftDown()) {
-            tooltipLineConsumer.accept(Component.translatable(TooltipComponent.ADDITIONAL.getTranslationKey(),
+            tooltipLines.add(Component.translatable(TooltipComponent.ADDITIONAL.getTranslationKey(),
                             Component.translatable(TooltipComponent.SHIFT.getTranslationKey()).withStyle(ChatFormatting.YELLOW))
                     .withStyle(ChatFormatting.GRAY));
         } else {
             for (TooltipComponent tooltipComponent : TooltipComponent.values()) {
                 if (tooltipComponent.notEmptyChecker.test(block.getType().getConfig())) {
-                    tooltipLineConsumer.accept(tooltipComponent.getComponent(block.getType().getConfig()));
+                    tooltipLines.add(tooltipComponent.getComponent(block.getType().getConfig()));
                 }
             }
         }
+        return tooltipLines;
     }
 
     public enum TooltipComponent implements StringRepresentable {
@@ -88,8 +88,8 @@ public class TorchTooltipHelper {
         }
 
         public String getTranslationKey() {
-            return Util.makeDescriptionId(Registries.elementsDirPath(Registries.BLOCK),
-                    MagnumTorch.id("magnum_torch")) + ".tooltip." + this.getSerializedName();
+            return Util.makeDescriptionId(Registries.elementsDirPath(Registries.BLOCK), MagnumTorch.id("magnum_torch"))
+                    + ".tooltip." + this.getSerializedName();
         }
 
         public Component getComponent(ServerConfig.MagnumTorchConfig config) {

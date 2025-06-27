@@ -9,6 +9,6 @@ public class MagnumTorchClient implements ClientModConstructor {
 
     @Override
     public void onClientSetup() {
-        ItemTooltipRegistry.registerItemTooltip(MagnumTorchBlock.class, TorchTooltipHelper::appendHoverText);
+        ItemTooltipRegistry.BLOCK.registerItemTooltipLines(MagnumTorchBlock.class, TorchTooltipHelper::appendHoverText);
     }
 }
