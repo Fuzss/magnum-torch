@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": "minecraft:amethyst_shard",
+    "G": "minecraft:gold_ingot",
+    "L": "#minecraft:logs",
+    "T": "minecraft:fire_charge"
+  },
+  "pattern": [
+    "GTG",
+    "#L#",
+    "#L#"
+  ],
+  "result": {
+    "count": 1,
+    "id": "magnumtorch:amethyst_magnum_torch"
+  }
+}
