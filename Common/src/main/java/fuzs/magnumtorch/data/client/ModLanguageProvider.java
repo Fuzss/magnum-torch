@@ -18,10 +18,12 @@ public class ModLanguageProvider extends AbstractLanguageProvider {
         builder.add(ModRegistry.DIAMOND_MAGNUM_TORCH_BLOCK.value(), "Diamond Magnum Torch");
         builder.add(ModRegistry.EMERALD_MAGNUM_TORCH_BLOCK.value(), "Emerald Magnum Torch");
         builder.add(ModRegistry.AMETHYST_MAGNUM_TORCH_BLOCK.value(), "Amethyst Magnum Torch");
-        builder.add(TorchTooltipHelper.TooltipComponent.DESCRIPTION.getTranslationKey(), "Prevents mob spawns in a huge area.");
-        builder.add(TorchTooltipHelper.TooltipComponent.ADDITIONAL.getTranslationKey(), "Hold %s for more information");
-        builder.add(TorchTooltipHelper.TooltipComponent.SHIFT.getTranslationKey(), "Shift");
-        builder.add(TorchTooltipHelper.TooltipComponent.MOB_TYPES.getTranslationKey(), "Mob Type(s): %s");
+        builder.add(TorchTooltipHelper.TooltipComponent.DESCRIPTION.getTranslationKey(),
+                "Prevents mob spawns in a huge area.");
+        builder.add(TorchTooltipHelper.TooltipComponent.ADDITIONAL.getTranslationKey(),
+                "Hold %s to view more information.");
+        builder.add(TorchTooltipHelper.TooltipComponent.SHIFT.getTranslationKey(), "\u21E7 Shift");
+        builder.add(TorchTooltipHelper.TooltipComponent.MOB_TYPES.getTranslationKey(), "Mob Types: %s");
         builder.add(TorchTooltipHelper.TooltipComponent.BLACKLIST.getTranslationKey(), "Blacklist: %s");
         builder.add(TorchTooltipHelper.TooltipComponent.WHITELIST.getTranslationKey(), "Whitelist: %s");
         builder.add(TorchTooltipHelper.TooltipComponent.SHAPE_TYPE.getTranslationKey(), "Shape Type: %s");

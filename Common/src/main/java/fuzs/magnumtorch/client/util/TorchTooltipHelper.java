@@ -26,11 +26,11 @@ public class TorchTooltipHelper {
     public static List<Component> appendHoverText(MagnumTorchBlock block) {
         List<Component> tooltipLines = new ArrayList<>();
         tooltipLines.add(Component.translatable(TooltipComponent.DESCRIPTION.getTranslationKey())
-                .withStyle(ChatFormatting.GRAY));
+                .withStyle(ChatFormatting.GOLD));
         if (!Screen.hasShiftDown()) {
             tooltipLines.add(Component.translatable(TooltipComponent.ADDITIONAL.getTranslationKey(),
-                            Component.translatable(TooltipComponent.SHIFT.getTranslationKey()).withStyle(ChatFormatting.YELLOW))
-                    .withStyle(ChatFormatting.GRAY));
+                    Component.translatable(TooltipComponent.SHIFT.getTranslationKey())
+                            .withStyle(ChatFormatting.LIGHT_PURPLE)).withStyle(ChatFormatting.GRAY));
         } else {
             for (TooltipComponent tooltipComponent : TooltipComponent.values()) {
                 if (tooltipComponent.notEmptyChecker.test(block.getType().getConfig())) {
