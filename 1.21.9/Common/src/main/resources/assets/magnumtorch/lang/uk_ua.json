@@ -1,0 +1,15 @@
+{
+  "block.magnumtorch.diamond_magnum_torch": "Діамантовий великий смолоскип",
+  "block.magnumtorch.emerald_magnum_torch": "Смарагдовий великий смолоскип",
+  "block.magnumtorch.amethyst_magnum_torch": "Аметистовий великий смолоскип",
+  "block.magnumtorch.magnum_torch.info": "Запобігає появі мобів на великій області.",
+  "block.magnumtorch.magnum_torch.info.more": "Утримуйте %s для подробиць",
+  "block.magnumtorch.magnum_torch.info.shift": "Shift",
+  "block.magnumtorch.magnum_torch.info.mob_types": "Тип моба(ів): %s",
+  "block.magnumtorch.magnum_torch.info.blacklist": "Чорний список: %s",
+  "block.magnumtorch.magnum_torch.info.whitelist": "Білий список: %s",
+  "block.magnumtorch.magnum_torch.info.shape_type": "Тип форми: %s",
+  "block.magnumtorch.magnum_torch.info.horizontal_range": "Горизонтальний діапазон: %s",
+  "block.magnumtorch.magnum_torch.info.vertical_range": "Вертикальний діапазон: %s",
+  "itemGroup.magnumtorch.main": "Magnum Torch"
+}
