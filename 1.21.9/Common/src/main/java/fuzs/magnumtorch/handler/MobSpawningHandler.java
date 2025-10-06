@@ -54,7 +54,7 @@ public class MobSpawningHandler {
     }
 
     private static boolean isSpawnCancelled(PoiManager poiManager, EntityType<?> entityType, BlockPos toCheck, @NotNull EntitySpawnReason spawnType, ResourceKey<PoiType> poiTypeKey, ServerConfig.MagnumTorchConfig config) {
-        if (config.blockedSpawnTypes.contains(spawnType) && config.isAffected(entityType)) {
+        if (config.blockedSpawnReasons.contains(spawnType) && config.isAffected(entityType)) {
             // range based on cuboid as it contains all other shape types, 1.7320508076=3**0.5
             return poiManager.findAll(poiType -> poiType.is(poiTypeKey),
                             Predicates.alwaysTrue(),

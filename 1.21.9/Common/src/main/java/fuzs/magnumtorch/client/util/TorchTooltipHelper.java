@@ -4,9 +4,9 @@ import com.google.common.base.Predicates;
 import fuzs.magnumtorch.MagnumTorch;
 import fuzs.magnumtorch.config.ServerConfig;
 import fuzs.magnumtorch.world.level.block.MagnumTorchBlock;
+import fuzs.puzzleslib.api.util.v1.CommonHelper;
 import net.minecraft.ChatFormatting;
 import net.minecraft.Util;
-import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.CommonComponents;
@@ -27,7 +27,7 @@ public class TorchTooltipHelper {
         List<Component> tooltipLines = new ArrayList<>();
         tooltipLines.add(Component.translatable(TooltipComponent.DESCRIPTION.getTranslationKey())
                 .withStyle(ChatFormatting.GOLD));
-        if (!Screen.hasShiftDown()) {
+        if (!CommonHelper.hasShiftDown()) {
             tooltipLines.add(Component.translatable(TooltipComponent.ADDITIONAL.getTranslationKey(),
                     Component.translatable(TooltipComponent.SHIFT.getTranslationKey())
                             .withStyle(ChatFormatting.LIGHT_PURPLE)).withStyle(ChatFormatting.GRAY));
@@ -38,6 +38,7 @@ public class TorchTooltipHelper {
                 }
             }
         }
+
         return tooltipLines;
     }
 
@@ -45,9 +46,9 @@ public class TorchTooltipHelper {
         DESCRIPTION,
         ADDITIONAL,
         SHIFT,
-        MOB_TYPES((ServerConfig.MagnumTorchConfig config) -> !config.mobCategories.isEmpty(),
+        MOB_TYPES((ServerConfig.MagnumTorchConfig config) -> !config.blockedMobCategories.isEmpty(),
                 (ServerConfig.MagnumTorchConfig config) -> {
-                    return mergeComponentList(config.mobCategories, ChatFormatting.YELLOW, Enum::name);
+                    return mergeComponentList(config.blockedMobCategories, ChatFormatting.YELLOW, Enum::name);
                 }),
         BLACKLIST((ServerConfig.MagnumTorchConfig config) -> !config.mobBlacklist.isEmpty(),
                 (ServerConfig.MagnumTorchConfig config) -> {
