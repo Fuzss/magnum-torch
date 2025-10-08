@@ -1,0 +1,15 @@
+{
+  "block.magnumtorch.diamond_magnum_torch": "Diamant Magnumfakkel",
+  "block.magnumtorch.emerald_magnum_torch": "Smaragd Magnumfakkel",
+  "block.magnumtorch.amethyst_magnum_torch": "Ametyst Magnumfakkel",
+  "block.magnumtorch.magnum_torch.info": "Forhindrer mobfremkallinger i et stort område.",
+  "block.magnumtorch.magnum_torch.info.more": "Hold %s for mer informasjon",
+  "block.magnumtorch.magnum_torch.info.shift": "Shift",
+  "block.magnumtorch.magnum_torch.info.mob_types": "Mob-type(r): %s",
+  "block.magnumtorch.magnum_torch.info.blacklist": "Svarteliste: %s",
+  "block.magnumtorch.magnum_torch.info.whitelist": "Hviteliste: %s",
+  "block.magnumtorch.magnum_torch.info.shape_type": "Formtype: %s",
+  "block.magnumtorch.magnum_torch.info.horizontal_range": "Horisontal rekkevidde: %s",
+  "block.magnumtorch.magnum_torch.info.vertical_range": "Vertikal rekkevidde: %s",
+  "itemGroup.magnumtorch.main": "Magnumfakkel"
+}
