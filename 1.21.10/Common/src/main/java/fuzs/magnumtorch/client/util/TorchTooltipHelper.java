@@ -6,7 +6,6 @@ import fuzs.magnumtorch.config.ServerConfig;
 import fuzs.magnumtorch.world.level.block.MagnumTorchBlock;
 import fuzs.puzzleslib.api.util.v1.CommonHelper;
 import net.minecraft.ChatFormatting;
-import net.minecraft.Util;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.CommonComponents;
@@ -46,9 +45,11 @@ public class TorchTooltipHelper {
         DESCRIPTION,
         ADDITIONAL,
         SHIFT,
-        MOB_TYPES((ServerConfig.MagnumTorchConfig config) -> !config.blockedMobCategories.isEmpty(),
+        MOB_TYPES((ServerConfig.MagnumTorchConfig config) -> !config.blockedMobCategoryGroups.isEmpty(),
                 (ServerConfig.MagnumTorchConfig config) -> {
-                    return mergeComponentList(config.blockedMobCategories, ChatFormatting.YELLOW, Enum::name);
+                    return mergeComponentList(config.blockedMobCategoryGroups,
+                            ChatFormatting.YELLOW,
+                            StringRepresentable::getSerializedName);
                 }),
         BLACKLIST((ServerConfig.MagnumTorchConfig config) -> !config.mobBlacklist.isEmpty(),
                 (ServerConfig.MagnumTorchConfig config) -> {
@@ -63,13 +64,13 @@ public class TorchTooltipHelper {
                             (EntityType<?> entityType) -> BuiltInRegistries.ENTITY_TYPE.getKey(entityType).toString());
                 }),
         SHAPE_TYPE((ServerConfig.MagnumTorchConfig config) -> {
-            return Component.literal(config.shapeType.name()).withStyle(ChatFormatting.GOLD);
+            return Component.literal(config.shapeType.getSerializedName()).withStyle(ChatFormatting.GOLD);
         }),
         HORIZONTAL_RANGE((ServerConfig.MagnumTorchConfig config) -> {
-            return Component.literal(String.valueOf(config.horizontalRange)).withStyle(ChatFormatting.LIGHT_PURPLE);
+            return Component.literal(String.valueOf(config.horizontalRange())).withStyle(ChatFormatting.LIGHT_PURPLE);
         }),
         VERTICAL_RANGE((ServerConfig.MagnumTorchConfig config) -> {
-            return Component.literal(String.valueOf(config.verticalRange)).withStyle(ChatFormatting.LIGHT_PURPLE);
+            return Component.literal(String.valueOf(config.verticalRange())).withStyle(ChatFormatting.LIGHT_PURPLE);
         });
 
         final Predicate<ServerConfig.MagnumTorchConfig> notEmptyChecker;
@@ -89,8 +90,8 @@ public class TorchTooltipHelper {
         }
 
         public String getTranslationKey() {
-            return Util.makeDescriptionId(Registries.elementsDirPath(Registries.BLOCK), MagnumTorch.id("magnum_torch"))
-                    + ".tooltip." + this.getSerializedName();
+            return MagnumTorch.id("magnum_torch")
+                    .toLanguageKey(Registries.elementsDirPath(Registries.BLOCK), "tooltip." + this.getSerializedName());
         }
 
         public Component getComponent(ServerConfig.MagnumTorchConfig config) {

@@ -2,10 +2,14 @@ package fuzs.magnumtorch.world.level.block;
 
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import fuzs.magnumtorch.attachment.TorchPositions;
+import fuzs.magnumtorch.init.ModRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelReader;
@@ -53,8 +57,8 @@ public class MagnumTorchBlock extends Block implements SimpleWaterloggedBlock {
     }
 
     @Override
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> stateBuilder) {
-        stateBuilder.add(WATERLOGGED);
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        builder.add(WATERLOGGED);
     }
 
     @Override
@@ -63,10 +67,18 @@ public class MagnumTorchBlock extends Block implements SimpleWaterloggedBlock {
     }
 
     @Override
+    public BlockState getStateForPlacement(BlockPlaceContext context) {
+        FluidState fluidState = context.getLevel().getFluidState(context.getClickedPos());
+        boolean bl = fluidState.getType() == Fluids.WATER;
+        return this.defaultBlockState().setValue(WATERLOGGED, bl);
+    }
+
+    @Override
     protected BlockState updateShape(BlockState blockState, LevelReader levelReader, ScheduledTickAccess scheduledTickAccess, BlockPos blockPos, Direction direction, BlockPos blockPos2, BlockState blockState2, RandomSource randomSource) {
         if (blockState.getValue(WATERLOGGED)) {
             scheduledTickAccess.scheduleTick(blockPos, Fluids.WATER, Fluids.WATER.getTickDelay(levelReader));
         }
+
         return direction == Direction.DOWN && !this.canSurvive(blockState, levelReader, blockPos) ?
                 Blocks.AIR.defaultBlockState() : super.updateShape(blockState,
                 levelReader,
@@ -95,5 +107,20 @@ public class MagnumTorchBlock extends Block implements SimpleWaterloggedBlock {
         double d2 = (double) pos.getZ() + 0.5D;
         level.addParticle(ParticleTypes.SMOKE, d0, d1, d2, 0.0, 0.0, 0.0);
         level.addParticle(ParticleTypes.FLAME, d0, d1, d2, 0.0, 0.0, 0.0);
+    }
+
+    /**
+     * TODO remove random ticks when updating to next major version
+     */
+    @Deprecated
+    @Override
+    protected void randomTick(BlockState blockState, ServerLevel serverLevel, BlockPos blockPos, RandomSource randomSource) {
+        serverLevel.getServer().execute(() -> {
+            if (serverLevel.getBlockState(blockPos) == blockState) {
+                TorchPositions torchPositions = ModRegistry.TORCH_POSITIONS_ATTACHMENT_TYPE.getOrDefault(serverLevel,
+                        TorchPositions.EMPTY);
+                ModRegistry.TORCH_POSITIONS_ATTACHMENT_TYPE.set(serverLevel, torchPositions.add(blockPos, this.type));
+            }
+        });
     }
 }

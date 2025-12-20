@@ -7,6 +7,7 @@ import fuzs.puzzleslib.api.config.v3.ConfigHolder;
 import fuzs.puzzleslib.api.core.v1.ModConstructor;
 import fuzs.puzzleslib.api.core.v1.utility.ResourceLocationHelper;
 import fuzs.puzzleslib.api.event.v1.entity.ServerEntityLevelEvents;
+import fuzs.puzzleslib.api.event.v1.level.GatherPotentialSpawnsCallback;
 import net.minecraft.resources.ResourceLocation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -26,6 +27,7 @@ public class MagnumTorch implements ModConstructor {
 
     private static void registerEventHandlers() {
         ServerEntityLevelEvents.LOAD.register(MobSpawningHandler::onEntityLoad);
+        GatherPotentialSpawnsCallback.EVENT.register(MobSpawningHandler::onGatherPotentialSpawns);
     }
 
     public static ResourceLocation id(String path) {

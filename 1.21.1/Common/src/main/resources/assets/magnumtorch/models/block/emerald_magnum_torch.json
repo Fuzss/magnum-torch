@@ -1,6 +1,0 @@
-{
-  "parent": "magnumtorch:block/magnum_torch",
-  "textures": {
-    "texture": "magnumtorch:block/emerald_magnum_torch"
-  }
-}

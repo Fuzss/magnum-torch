@@ -8,6 +8,7 @@ import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.ItemLike;
 
 public class ModRecipeProvider extends AbstractRecipeProvider {
 
@@ -17,41 +18,21 @@ public class ModRecipeProvider extends AbstractRecipeProvider {
 
     @Override
     public void addRecipes(RecipeOutput recipeOutput) {
-        ShapedRecipeBuilder.shaped(this.items(),
-                        RecipeCategory.DECORATIONS,
-                        ModRegistry.DIAMOND_MAGNUM_TORCH_BLOCK.value())
+        this.magnumTorch(recipeOutput, ModRegistry.DIAMOND_MAGNUM_TORCH_BLOCK.value(), Items.DIAMOND);
+        this.magnumTorch(recipeOutput, ModRegistry.EMERALD_MAGNUM_TORCH_BLOCK.value(), Items.EMERALD);
+        this.magnumTorch(recipeOutput, ModRegistry.AMETHYST_MAGNUM_TORCH_BLOCK.value(), Items.AMETHYST_SHARD);
+    }
+
+    public final void magnumTorch(RecipeOutput recipeOutput, ItemLike resultItem, ItemLike ingredientItem) {
+        ShapedRecipeBuilder.shaped(this.items(), RecipeCategory.DECORATIONS, resultItem)
                 .define('L', ItemTags.LOGS)
                 .define('T', Items.FIRE_CHARGE)
                 .define('G', Items.GOLD_INGOT)
-                .define('#', Items.DIAMOND)
+                .define('#', ingredientItem)
                 .pattern("GTG")
                 .pattern("#L#")
                 .pattern("#L#")
-                .unlockedBy(getHasName(Items.DIAMOND), this.has(Items.DIAMOND))
-                .save(recipeOutput);
-        ShapedRecipeBuilder.shaped(this.items(),
-                        RecipeCategory.DECORATIONS,
-                        ModRegistry.EMERALD_MAGNUM_TORCH_BLOCK.value())
-                .define('L', ItemTags.LOGS)
-                .define('T', Items.FIRE_CHARGE)
-                .define('G', Items.GOLD_INGOT)
-                .define('#', Items.EMERALD)
-                .pattern("GTG")
-                .pattern("#L#")
-                .pattern("#L#")
-                .unlockedBy(getHasName(Items.EMERALD), this.has(Items.EMERALD))
-                .save(recipeOutput);
-        ShapedRecipeBuilder.shaped(this.items(),
-                        RecipeCategory.DECORATIONS,
-                        ModRegistry.AMETHYST_MAGNUM_TORCH_BLOCK.value())
-                .define('L', ItemTags.LOGS)
-                .define('T', Items.FIRE_CHARGE)
-                .define('G', Items.GOLD_INGOT)
-                .define('#', Items.AMETHYST_SHARD)
-                .pattern("GTG")
-                .pattern("#L#")
-                .pattern("#L#")
-                .unlockedBy(getHasName(Items.AMETHYST_SHARD), this.has(Items.AMETHYST_SHARD))
+                .unlockedBy(getHasName(ingredientItem), this.has(ingredientItem))
                 .save(recipeOutput);
     }
 }
