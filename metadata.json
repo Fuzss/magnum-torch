@@ -1,0 +1,61 @@
+{
+    "mod": {
+        "id": "magnumtorch",
+        "group": "fuzs.magnumtorch",
+        "name": "Magnum Torch",
+        "version": "21.11.0",
+        "authors": [
+            "Fuzs"
+        ],
+        "description": "Powerful torches to prevent mob spawns around your home in a large area.",
+        "license": "MPL-2.0"
+    },
+    "dependencies": [
+        {
+            "name": "fabricapi",
+            "type": "required",
+            "platforms": [
+                "fabric"
+            ]
+        },
+        {
+            "name": "forgeconfigapiport",
+            "type": "required",
+            "platforms": [
+                "fabric"
+            ]
+        },
+        {
+            "name": "puzzleslib",
+            "type": "required",
+            "platforms": [
+                "fabric",
+                "neoforge"
+            ]
+        }
+    ],
+    "links": [
+        {
+            "name": "github",
+            "slug": "magnumtorch"
+        },
+        {
+            "name": "curseforge",
+            "slug": "magnum-torch",
+            "id": "593981"
+        },
+        {
+            "name": "modrinth",
+            "slug": "magnum-torch",
+            "id": "jorDmSKv"
+        }
+    ],
+    "environments": {
+        "client": "required",
+        "server": "required"
+    },
+    "platforms": [
+        "fabric",
+        "neoforge"
+    ]
+}

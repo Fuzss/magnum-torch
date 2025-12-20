@@ -10,7 +10,7 @@ import net.minecraft.client.data.models.model.ModelTemplate;
 import net.minecraft.client.data.models.model.TextureMapping;
 import net.minecraft.client.data.models.model.TextureSlot;
 import net.minecraft.client.data.models.model.TexturedModel;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.Block;
 
 public class ModModelProvider extends AbstractModelProvider {
@@ -32,8 +32,8 @@ public class ModModelProvider extends AbstractModelProvider {
     }
 
     public final void createMagnumTorch(Block block, BlockModelGenerators builder) {
-        ResourceLocation resourceLocation = MAGNUM_TORCH_SIDE.create(block, builder.modelOutput);
+        Identifier identifier = MAGNUM_TORCH_SIDE.create(block, builder.modelOutput);
         builder.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(block,
-                BlockModelGenerators.plainVariant(resourceLocation)));
+                BlockModelGenerators.plainVariant(identifier)));
     }
 }

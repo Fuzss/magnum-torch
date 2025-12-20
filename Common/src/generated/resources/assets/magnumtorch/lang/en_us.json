@@ -6,7 +6,7 @@
   "block.magnumtorch.magnum_torch.tooltip.blacklist": "Blacklist: %s",
   "block.magnumtorch.magnum_torch.tooltip.description": "Prevents mob spawns in a huge area.",
   "block.magnumtorch.magnum_torch.tooltip.horizontal_range": "Horizontal Block Range: %s",
-  "block.magnumtorch.magnum_torch.tooltip.mob_types": "Mob Types: %s",
+  "block.magnumtorch.magnum_torch.tooltip.mob_types": "Mob Type: %s",
   "block.magnumtorch.magnum_torch.tooltip.shape_type": "Shape Type: %s",
   "block.magnumtorch.magnum_torch.tooltip.shift": "⇧ Shift",
   "block.magnumtorch.magnum_torch.tooltip.vertical_range": "Vertical Block Range: %s",
