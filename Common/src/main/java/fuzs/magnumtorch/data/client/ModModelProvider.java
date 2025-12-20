@@ -31,7 +31,7 @@ public class ModModelProvider extends AbstractModelProvider {
         this.createMagnumTorch(ModRegistry.AMETHYST_MAGNUM_TORCH_BLOCK.value(), builder);
     }
 
-    private void createMagnumTorch(Block block, BlockModelGenerators builder) {
+    public final void createMagnumTorch(Block block, BlockModelGenerators builder) {
         ResourceLocation resourceLocation = MAGNUM_TORCH_SIDE.create(block, builder.modelOutput);
         builder.blockStateOutput.accept(BlockModelGenerators.createSimpleBlock(block,
                 BlockModelGenerators.plainVariant(resourceLocation)));

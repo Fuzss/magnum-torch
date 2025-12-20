@@ -1,14 +1,20 @@
 package fuzs.magnumtorch.init;
 
 import fuzs.magnumtorch.MagnumTorch;
+import fuzs.magnumtorch.attachment.TorchPositions;
 import fuzs.magnumtorch.world.level.block.MagnumTorchBlock;
 import fuzs.magnumtorch.world.level.block.MagnumTorchType;
+import fuzs.puzzleslib.api.attachment.v4.DataAttachmentRegistry;
+import fuzs.puzzleslib.api.attachment.v4.DataAttachmentType;
 import fuzs.puzzleslib.api.init.v3.registry.RegistryManager;
+import fuzs.puzzleslib.api.init.v3.tags.TagFactory;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.ai.village.poi.PoiType;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -49,11 +55,19 @@ public class ModRegistry {
     public static final Holder.Reference<CreativeModeTab> CREATIVE_MODE_TAB = REGISTRIES.registerCreativeModeTab(
             DIAMOND_MAGNUM_TORCH_ITEM);
 
+    static final TagFactory TAGS = TagFactory.make(MagnumTorch.MOD_ID);
+    public static final TagKey<Block> MAGNUM_TORCHES_BLOCK_TAG = TAGS.registerBlockTag("magnum_torches");
+
+    public static final DataAttachmentType<Level, TorchPositions> TORCH_POSITIONS_ATTACHMENT_TYPE = DataAttachmentRegistry.<TorchPositions>levelBuilder()
+            .persistent(TorchPositions.CODEC)
+            .build(MagnumTorch.id("torch_positions"));
+
     public static void bootstrap() {
         REGISTRIES.register(Registries.BLOCK_TYPE, "magnum_torch", () -> MagnumTorchBlock.CODEC);
     }
 
     private static BlockBehaviour.Properties magnumTorchProperties() {
+        // TODO remove random ticks when updating to next major version
         return BlockBehaviour.Properties.of()
                 .mapColor(MapColor.WOOD)
                 .instrument(NoteBlockInstrument.BASS)
@@ -63,6 +77,7 @@ public class ModRegistry {
                     return 10;
                 })
                 .noOcclusion()
-                .pushReaction(PushReaction.DESTROY);
+                .pushReaction(PushReaction.DESTROY)
+                .randomTicks();
     }
 }

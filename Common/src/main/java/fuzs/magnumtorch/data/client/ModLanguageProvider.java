@@ -23,11 +23,12 @@ public class ModLanguageProvider extends AbstractLanguageProvider {
         builder.add(TorchTooltipHelper.TooltipComponent.ADDITIONAL.getTranslationKey(),
                 "Hold %s to view more information.");
         builder.add(TorchTooltipHelper.TooltipComponent.SHIFT.getTranslationKey(), "\u21E7 Shift");
-        builder.add(TorchTooltipHelper.TooltipComponent.MOB_TYPES.getTranslationKey(), "Mob Types: %s");
+        builder.add(TorchTooltipHelper.TooltipComponent.MOB_TYPES.getTranslationKey(), "Mob Type: %s");
         builder.add(TorchTooltipHelper.TooltipComponent.BLACKLIST.getTranslationKey(), "Blacklist: %s");
         builder.add(TorchTooltipHelper.TooltipComponent.WHITELIST.getTranslationKey(), "Whitelist: %s");
         builder.add(TorchTooltipHelper.TooltipComponent.SHAPE_TYPE.getTranslationKey(), "Shape Type: %s");
-        builder.add(TorchTooltipHelper.TooltipComponent.HORIZONTAL_RANGE.getTranslationKey(), "Horizontal Range: %s");
-        builder.add(TorchTooltipHelper.TooltipComponent.VERTICAL_RANGE.getTranslationKey(), "Vertical Range: %s");
+        builder.add(TorchTooltipHelper.TooltipComponent.HORIZONTAL_RANGE.getTranslationKey(),
+                "Horizontal Block Range: %s");
+        builder.add(TorchTooltipHelper.TooltipComponent.VERTICAL_RANGE.getTranslationKey(), "Vertical Block Range: %s");
     }
 }

@@ -3,7 +3,10 @@ package fuzs.magnumtorch.world.level.block;
 import fuzs.magnumtorch.MagnumTorch;
 import fuzs.magnumtorch.config.ServerConfig;
 import fuzs.magnumtorch.init.ModRegistry;
+import fuzs.puzzleslib.api.network.v4.codec.ExtraStreamCodecs;
+import io.netty.buffer.ByteBuf;
 import net.minecraft.core.Holder;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.entity.ai.village.poi.PoiType;
 
@@ -46,9 +49,14 @@ public enum MagnumTorchType implements StringRepresentable {
 
     public static final StringRepresentable.EnumCodec<MagnumTorchType> CODEC = StringRepresentable.fromEnum(
             MagnumTorchType::values);
+    public static final StreamCodec<ByteBuf, MagnumTorchType> STREAM_CODEC = ExtraStreamCodecs.fromEnum(MagnumTorchType.class);
 
     public abstract ServerConfig.MagnumTorchConfig getConfig();
 
+    /**
+     * // TODO remove when updating to next major version
+     */
+    @Deprecated
     public abstract Holder.Reference<PoiType> getPoiType();
 
     @Override

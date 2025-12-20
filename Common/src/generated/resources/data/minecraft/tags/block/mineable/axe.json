@@ -1,7 +1,5 @@
 {
   "values": [
-    "magnumtorch:amethyst_magnum_torch",
-    "magnumtorch:diamond_magnum_torch",
-    "magnumtorch:emerald_magnum_torch"
+    "#magnumtorch:magnum_torches"
   ]
 }
