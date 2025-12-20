@@ -1,2 +1,3 @@
-// 1.21	2024-08-12T17:12:47.785261	Tags for minecraft:block mod id vanilla
-ee410f2d826fece57719be30cc05c46e616d52f8 data/minecraft/tags/block/mineable/axe.json
+// 1.21.1	2025-10-29T16:13:05.262651	Tags for minecraft:block mod id vanilla
+ee410f2d826fece57719be30cc05c46e616d52f8 data/magnumtorch/tags/block/magnum_torches.json
+f38b13c03f84a87eeb1921e49e2db057d0534d93 data/minecraft/tags/block/mineable/axe.json

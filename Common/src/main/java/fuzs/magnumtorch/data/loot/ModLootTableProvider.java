@@ -1,4 +1,4 @@
-package fuzs.magnumtorch.data;
+package fuzs.magnumtorch.data.loot;
 
 import fuzs.magnumtorch.init.ModRegistry;
 import fuzs.puzzleslib.api.data.v2.AbstractLootProvider;
