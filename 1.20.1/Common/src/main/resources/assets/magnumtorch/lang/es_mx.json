@@ -1,0 +1,15 @@
+{
+  "block.magnumtorch.diamond_magnum_torch": "Antorcha Magnum de Diamante",
+  "block.magnumtorch.emerald_magnum_torch": "Antorcha Magnum de Esmeralda",
+  "block.magnumtorch.amethyst_magnum_torch": "Antorcha Magnum de Amatista",
+  "block.magnumtorch.magnum_torch.info": "Evita la aparición de mobs en un área grande.",
+  "block.magnumtorch.magnum_torch.info.more": "Mantén %s para más información",
+  "block.magnumtorch.magnum_torch.info.shift": "Shift",
+  "block.magnumtorch.magnum_torch.info.mob_types": "Tipo(s) de Mob: %s",
+  "block.magnumtorch.magnum_torch.info.blacklist": "Blacklist: %s",
+  "block.magnumtorch.magnum_torch.info.whitelist": "Whitelist: %s",
+  "block.magnumtorch.magnum_torch.info.shape_type": "Tipo de Forma: %s",
+  "block.magnumtorch.magnum_torch.info.horizontal_range": "Rango Horizontal: %s",
+  "block.magnumtorch.magnum_torch.info.vertical_range": "Rango Vertical: %s",
+  "itemGroup.magnumtorch.main": "Magnum Torch"
+}
