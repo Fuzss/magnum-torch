@@ -1,9 +1,10 @@
 {
+    "minecraft": "26.1.2",
     "mod": {
         "id": "magnumtorch",
         "group": "fuzs.magnumtorch",
         "name": "Magnum Torch",
-        "version": "21.11.0",
+        "version": "26.1.0",
         "authors": [
             "Fuzs"
         ],
@@ -36,13 +37,13 @@
     ],
     "links": [
         {
-            "name": "github",
-            "slug": "magnumtorch"
-        },
-        {
             "name": "curseforge",
             "slug": "magnum-torch",
             "id": "593981"
+        },
+        {
+            "name": "github",
+            "slug": "magnum-torch"
         },
         {
             "name": "modrinth",
