@@ -1,7 +1,7 @@
-// 26.1.2	2026-04-28T13:14:27.196594	Recipes
+// 26.2	2026-06-18T07:25:00.106138	Recipes
 b29848516d95ed5ff06d8e561e16171082995422 data/magnumtorch/advancement/recipes/decorations/amethyst_magnum_torch.json
 14d7408f69b06da6dda4e74ebff4fa83c8a1364e data/magnumtorch/advancement/recipes/decorations/diamond_magnum_torch.json
 34203342e15f40cccde70efa3d1c9c67498cfa24 data/magnumtorch/advancement/recipes/decorations/emerald_magnum_torch.json
-26ebfc837d428d2fcc962598ab7054f64dc6d475 data/magnumtorch/recipe/amethyst_magnum_torch.json
-e29961bd18d24fb4df2e13391bc2f9b351791320 data/magnumtorch/recipe/diamond_magnum_torch.json
-095d1a52577b1a4d3f1d375208283878bbb44a46 data/magnumtorch/recipe/emerald_magnum_torch.json
+59f29c9e2c46c6dac1ab83224d0a30e54d2ef854 data/magnumtorch/recipe/amethyst_magnum_torch.json
+f7d9ad4cd40e6c156e9c7ba530343be10f5b9aed data/magnumtorch/recipe/diamond_magnum_torch.json
+3705a58a99be484457faf246efdb18154e10468b data/magnumtorch/recipe/emerald_magnum_torch.json

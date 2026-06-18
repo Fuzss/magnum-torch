@@ -19,6 +19,7 @@ import net.minecraft.world.level.StructureManager;
 import net.minecraft.world.level.biome.MobSpawnSettings;
 import net.minecraft.world.level.chunk.ChunkGenerator;
 import org.apache.commons.lang3.mutable.MutableBoolean;
+import org.jspecify.annotations.Nullable;
 
 import java.util.Collection;
 import java.util.EnumSet;
@@ -28,26 +29,25 @@ import java.util.function.Predicate;
 
 public class MobSpawningHandler {
 
-    public static EventResult onEntityLoad(Entity entity, ServerLevel serverLevel, boolean isNewlySpawned) {
-        if (!isNewlySpawned || !(entity instanceof Mob mob) || !MagnumTorch.CONFIG.getHolder(ServerConfig.class)
+    public static EventResult onEntityJoin(Entity entity, ServerLevel serverLevel, boolean isLoadedFromDisk, @Nullable EntitySpawnReason entitySpawnReason) {
+        if (isLoadedFromDisk || !(entity instanceof Mob mob) || !MagnumTorch.CONFIG.getHolder(ServerConfig.class)
                 .isAvailable()) {
             return EventResult.PASS;
         }
 
-        EntitySpawnReason entitySpawnReason = EntityHelper.getMobSpawnReason(mob);
         // natural spawning is handled elsewhere
         if (entitySpawnReason != null && entitySpawnReason != EntitySpawnReason.NATURAL) {
-            MutableBoolean mutableBoolean = new MutableBoolean();
+            MutableBoolean preventSpawning = new MutableBoolean();
             preventSpawning(serverLevel, entity.blockPosition(), entitySpawnReason, (MagnumTorchType type) -> {
                 if (type.getConfig().preventSpawning(entity.getType())) {
-                    mutableBoolean.setTrue();
+                    preventSpawning.setTrue();
                     return true;
                 } else {
                     return false;
                 }
             });
-            if (mutableBoolean.isTrue()) {
-                removeEntitySafely(serverLevel, entity);
+            if (preventSpawning.isTrue()) {
+                discardAllPassengers(serverLevel, entity);
                 return EventResult.INTERRUPT;
             }
         }
@@ -55,7 +55,7 @@ public class MobSpawningHandler {
         return EventResult.PASS;
     }
 
-    private static void removeEntitySafely(ServerLevel serverLevel, Entity entity) {
+    private static void discardAllPassengers(ServerLevel serverLevel, Entity entity) {
         // collect for running at the end of this server tick, other passengers might still be added to the level after this,
         // and calling Entity::discard to early for them will log an annoying warning
         List<Entity> entities = entity.getRootVehicle()
@@ -63,9 +63,11 @@ public class MobSpawningHandler {
                 .distinct()
                 .filter((Entity passenger) -> passenger != entity)
                 .toList();
-        serverLevel.getServer().execute(() -> {
-            entities.forEach(Entity::discard);
-        });
+        if (!entities.isEmpty()) {
+            serverLevel.getServer().execute(() -> {
+                entities.forEach(Entity::discard);
+            });
+        }
     }
 
     public static void onGatherPotentialSpawns(ServerLevel serverLevel, StructureManager structureManager, ChunkGenerator chunkGenerator, MobCategory mobCategory, BlockPos blockPos, List<Weighted<MobSpawnSettings.SpawnerData>> mobs) {
@@ -84,8 +86,7 @@ public class MobSpawningHandler {
     private static void preventSpawning(ServerLevel serverLevel, BlockPos blockPos, EntitySpawnReason entitySpawnReason, Predicate<MagnumTorchType> spawnBlocker) {
         TorchPositions torchPositions = ModRegistry.TORCH_POSITIONS_ATTACHMENT_TYPE.getOrDefault(serverLevel,
                 TorchPositions.EMPTY);
-        Collection<? extends TypedBlockArea> torchesInSection = torchPositions.getTorchesInSection(
-                blockPos);
+        Collection<? extends TypedBlockArea> torchesInSection = torchPositions.getTorchesInSection(blockPos);
         if (!torchesInSection.isEmpty()) {
             Set<MagnumTorchType> handledTypes = EnumSet.noneOf(MagnumTorchType.class);
             for (TypedBlockArea typedBlockArea : torchesInSection) {

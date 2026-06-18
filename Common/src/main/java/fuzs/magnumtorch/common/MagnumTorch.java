@@ -5,9 +5,9 @@ import fuzs.magnumtorch.common.handler.MobSpawningHandler;
 import fuzs.magnumtorch.common.init.ModRegistry;
 import fuzs.puzzleslib.common.api.config.v3.ConfigHolder;
 import fuzs.puzzleslib.common.api.core.v1.ModConstructor;
-import net.minecraft.resources.Identifier;
-import fuzs.puzzleslib.common.api.event.v1.entity.ServerEntityLevelEvents;
+import fuzs.puzzleslib.common.api.event.v1.entity.ServerEntityEvents;
 import fuzs.puzzleslib.common.api.event.v1.level.GatherPotentialSpawnsCallback;
+import net.minecraft.resources.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,7 +25,7 @@ public class MagnumTorch implements ModConstructor {
     }
 
     private static void registerEventHandlers() {
-        ServerEntityLevelEvents.LOAD.register(MobSpawningHandler::onEntityLoad);
+        ServerEntityEvents.JOIN.register(MobSpawningHandler::onEntityJoin);
         GatherPotentialSpawnsCallback.EVENT.register(MobSpawningHandler::onGatherPotentialSpawns);
     }
 
