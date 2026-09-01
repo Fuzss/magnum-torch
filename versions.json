@@ -6,11 +6,17 @@
     "26.1.x": "maintained",
     "26.2.x": "primary"
   },
-  "properties": {
-    "distributions.curseforge.id": "593981",
-    "distributions.curseforge.slug": "magnum-torch",
-    "distributions.github.slug": "magnum-torch",
-    "distributions.modrinth.id": "jorDmSKv",
-    "distributions.modrinth.slug": "magnum-torch"
+  "distributions": {
+    "curseforge": {
+      "id": "593981",
+      "slug": "magnum-torch"
+    },
+    "github": {
+      "slug": "magnum-torch"
+    },
+    "modrinth": {
+      "id": "jorDmSKv",
+      "slug": "magnum-torch"
+    }
   }
 }
