@@ -9,7 +9,6 @@ import fuzs.puzzleslib.common.api.attachment.v4.DataAttachmentType;
 import fuzs.puzzleslib.common.api.init.v3.registry.RegistryManager;
 import fuzs.puzzleslib.common.api.init.v3.tags.TagFactory;
 import net.minecraft.core.Holder;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.ai.village.poi.PoiType;
 import net.minecraft.world.item.CreativeModeTab;
@@ -63,7 +62,7 @@ public class ModRegistry {
             .build(MagnumTorch.id("torch_positions"));
 
     public static void bootstrap() {
-        REGISTRIES.register(Registries.BLOCK_TYPE, "magnum_torch", () -> MagnumTorchBlock.CODEC);
+        // NO-OP
     }
 
     private static BlockBehaviour.Properties magnumTorchProperties() {
@@ -77,7 +76,7 @@ public class ModRegistry {
                     return 10;
                 })
                 .noOcclusion()
-                .pushReaction(PushReaction.DESTROY)
+                .pushReaction(PushReaction.POPPED)
                 .randomTicks();
     }
 }

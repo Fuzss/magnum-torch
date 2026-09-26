@@ -1,7 +1,5 @@
 package fuzs.magnumtorch.common.world.level.block;
 
-import com.mojang.serialization.MapCodec;
-import com.mojang.serialization.codecs.RecordCodecBuilder;
 import fuzs.magnumtorch.common.attachment.TorchPositions;
 import fuzs.magnumtorch.common.init.ModRegistry;
 import net.minecraft.core.BlockPos;
@@ -28,9 +26,6 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class MagnumTorchBlock extends Block implements SimpleWaterloggedBlock {
-    public static final MapCodec<MagnumTorchBlock> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
-            MagnumTorchType.CODEC.fieldOf("type").forGetter(MagnumTorchBlock::getType),
-            propertiesCodec()).apply(instance, MagnumTorchBlock::new));
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
     private static final VoxelShape TORCH_AABB = Block.box(6.0D, 0.0D, 6.0D, 10.0D, 16.0D, 10.0D);
 
@@ -40,11 +35,6 @@ public class MagnumTorchBlock extends Block implements SimpleWaterloggedBlock {
         super(properties);
         this.type = type;
         this.registerDefaultState(this.stateDefinition.any().setValue(WATERLOGGED, Boolean.FALSE));
-    }
-
-    @Override
-    protected MapCodec<? extends MagnumTorchBlock> codec() {
-        return CODEC;
     }
 
     public MagnumTorchType getType() {
