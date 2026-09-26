@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "magnumtorch:amethyst_magnum_torch"
+        "recipes": "magnumtorch:amethyst_magnum_torch"
       },
       "trigger": "minecraft:recipe_unlocked"
     }

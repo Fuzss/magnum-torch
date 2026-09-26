@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "magnumtorch:emerald_magnum_torch"
+        "recipes": "magnumtorch:emerald_magnum_torch"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
